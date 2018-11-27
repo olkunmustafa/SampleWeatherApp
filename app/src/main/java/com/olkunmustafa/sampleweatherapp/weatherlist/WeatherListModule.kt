@@ -9,7 +9,7 @@ import dagger.Provides
 class WeatherListModule {
 
     @Provides
-    fun provideWeatherList(context: Context): WeatherListAdapter {
+    fun provideWeatherListAdapter(context: Context): WeatherListAdapter {
         return WeatherListAdapter(context)
     }
 

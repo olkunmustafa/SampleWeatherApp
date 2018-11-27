@@ -1,6 +1,9 @@
 package com.olkunmustafa.sampleweatherapp.weatherlist
 
-class WeatherListPresenter : IWeatherListContract.Presenter {
+import javax.inject.Inject
+
+class WeatherListPresenter @Inject constructor() : IWeatherListContract.Presenter {
+
     override fun setView(view: IWeatherListContract.View) {
     }
 

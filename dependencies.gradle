@@ -8,6 +8,8 @@ ext.versions = [
         dagger : "2.15",
         butterknife : "8.8.1",
         retrofit : "2.3.0",
-        stetho : "1.5.0"
+        stetho : "1.5.0",
+
+        roomdb : "1.1.1"
 
 ]

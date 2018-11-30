@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="standart_space_for_app">16dp</dimen>
+
+    <dimen name="cardview_mlr">@dimen/standart_space_for_app</dimen>
+    <dimen name="cardview_list_item_p">@dimen/standart_space_for_app</dimen>
+    <dimen name="cardview_item_wrapper_ptb">5dp</dimen>
+</resources>

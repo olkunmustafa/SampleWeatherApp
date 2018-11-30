@@ -26,6 +26,8 @@ class WeatherListPresenter @Inject constructor() : IWeatherListContract.Presente
     }
 
     override fun created() {
+        this.mView.init()
+
         this.weatherListDisposable =
                 this.iWeatherListUtil.getWeatherRequestList()
                     .subscribeOn(Schedulers.io())

@@ -6,22 +6,19 @@
         android:layout_marginStart="@dimen/cardview_mlr"
         android:layout_marginLeft="@dimen/cardview_mlr"
         android:layout_marginEnd="@dimen/cardview_mlr"
-        android:layout_marginRight="@dimen/cardview_mlr"
->
+        android:layout_marginRight="@dimen/cardview_mlr">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="@dimen/cardview_list_item_p"
-    >
+            android:padding="@dimen/cardview_list_item_p">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                style="@style/CardItemTextWrapper"
-        >
+                style="@style/CardItemTextWrapper">
 
             <android.support.v7.widget.AppCompatTextView
                     android:layout_width="0dp"
@@ -63,8 +60,7 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-        >
+                android:orientation="horizontal">
 
             <android.support.v7.widget.AppCompatTextView
                     android:layout_width="0dp"

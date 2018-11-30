@@ -11,16 +11,23 @@ import butterknife.ButterKnife
 import com.google.gson.Gson
 import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
+import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
+import com.olkunmustafa.sampleweatherapp.model.Weather
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import java.util.function.Consumer
 
 class WeatherListAdapter(
-    private var mContext: Context,
-    private var mGson : Gson?
-    ) : RecyclerView.Adapter<WeatherListAdapter.CardViewHolder>() {
+    private val context: Context,
+    private val icreateWeatherModel: ICreateWeatherModel
+) : RecyclerView.Adapter<WeatherListAdapter.CardViewHolder>() {
 
     lateinit var weatherRequestList: List<WeatherRequest>
+    private var convertWeatherModelDis : Disposable? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val rootView: View = LayoutInflater.from(mContext)
+        val rootView: View = LayoutInflater.from(context)
             .inflate(R.layout.item_weather_list, parent, false)
 
         return CardViewHolder(rootView)
@@ -31,14 +38,27 @@ class WeatherListAdapter(
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, indis: Int) {
-
-        val weatherRequest : WeatherRequest = this.weatherRequestList[indis]
-        holder.requestTime.text = weatherRequest.requestTime.toString()
-        holder.temperature.text = weatherRequest.weatherdata.main.temp.toString()
-        holder.location.text = weatherRequest.weatherdata.name
+        val weatherRequest: WeatherRequest = this.weatherRequestList[indis]
+        convertWeatherModelDis = icreateWeatherModel.convertWeatherModel(weatherRequest.weatherdata)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                Consumer<Weather> { weather ->
+                    holder.requestTime.text = weatherRequest.requestTime.toString()
+                    holder.temperature.text = weather.main.temp.toString()
+                    holder.location.text = weather.name
+                }
+            }
 
     }
 
+    fun destroy() {
+        convertWeatherModelDis?.let {
+            if(!it.isDisposed){
+                it.dispose()
+            }
+        }
+    }
 
     class CardViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 

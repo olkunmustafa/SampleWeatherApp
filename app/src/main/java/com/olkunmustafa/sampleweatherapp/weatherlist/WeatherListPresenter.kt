@@ -12,8 +12,8 @@ import javax.inject.Inject
 
 class WeatherListPresenter @Inject constructor() : IWeatherListContract.Presenter {
 
-    lateinit var weatherListDisposable: Disposable
-    lateinit var mView: IWeatherListContract.View
+    private lateinit var weatherListDisposable: Disposable
+    private lateinit var mView: IWeatherListContract.View
 
     @Inject
     lateinit var iWeatherListUtil: IWeatherListUtil
@@ -42,6 +42,8 @@ class WeatherListPresenter @Inject constructor() : IWeatherListContract.Presente
         if (!weatherListDisposable.isDisposed) {
             this.weatherListDisposable.dispose()
         }
+
+        weatherListAdapter.destroy()
     }
 
     override fun getWeatherListOnNext(): Consumer<List<WeatherRequest>> {

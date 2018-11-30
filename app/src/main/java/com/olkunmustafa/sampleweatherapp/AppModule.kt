@@ -1,6 +1,8 @@
 package com.olkunmustafa.sampleweatherapp
 
 import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherDatabase
 import dagger.Module
 import dagger.Provides
@@ -13,14 +15,19 @@ class AppModule(var mContext: Context) {
     @Provides
     fun provideContext(): Context {
         return this.mContext
-
     }
 
     @Singleton
     @Provides
-    fun provideWeatherDatabase( context: Context ): WeatherDatabase{
+    fun provideWeatherDatabase(context: Context): WeatherDatabase {
         return WeatherDatabase.getDatabase(context)
+    }
 
+    @Provides
+    fun provideGson(): Gson? {
+        return GsonBuilder()
+            .excludeFieldsWithoutExposeAnnotation()
+            .create()
     }
 
 }

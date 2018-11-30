@@ -16,6 +16,6 @@ class WeatherRequest {
     lateinit var requestTime: Instant
 
     @ColumnInfo(name = "weatherdata")
-    lateinit var weatherdata: Weather
+    lateinit var weatherdata: String
 
 }

@@ -24,6 +24,18 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
 
     lateinit var viewManager: RecyclerView.LayoutManager
 
+    companion object {
+
+        fun newInstance(): WeatherFragment {
+            val args = Bundle()
+            val fragment = WeatherFragment()
+
+            fragment.arguments = args
+            return fragment
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

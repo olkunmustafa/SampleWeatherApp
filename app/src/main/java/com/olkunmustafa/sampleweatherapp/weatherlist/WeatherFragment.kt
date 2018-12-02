@@ -24,7 +24,7 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
     lateinit var weatherListRequestView: RecyclerView
 
     @BindView(R.id.no_empty_view_text)
-    lateinit var noEmptyViewText : AppCompatTextView
+    lateinit var noEmptyViewText: AppCompatTextView
 
     private lateinit var viewManager: RecyclerView.LayoutManager
 
@@ -76,8 +76,23 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
     }
 
     override fun showEmptyListView() {
-        if( this.noEmptyViewText.visibility == View.GONE )
+        if (this.noEmptyViewText.visibility == View.GONE) {
             this.noEmptyViewText.visibility = View.VISIBLE
+        }
+
+        if (this.weatherListRequestView.visibility == View.VISIBLE) {
+            this.weatherListRequestView.visibility = View.GONE
+        }
+    }
+
+    override fun showAdapter() {
+        if (this.weatherListRequestView.visibility == View.GONE) {
+            this.weatherListRequestView.visibility = View.VISIBLE
+        }
+
+        if (this.noEmptyViewText.visibility == View.VISIBLE) {
+            this.noEmptyViewText.visibility = View.GONE
+        }
     }
 
     override fun setAdapter(adapter: WeatherListAdapter) {

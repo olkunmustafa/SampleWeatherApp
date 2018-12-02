@@ -14,6 +14,8 @@ interface IWeatherListContract {
 
         fun showEmptyListView()
 
+        fun showAdapter()
+
         fun setAdapter( adapter : WeatherListAdapter )
 
     }

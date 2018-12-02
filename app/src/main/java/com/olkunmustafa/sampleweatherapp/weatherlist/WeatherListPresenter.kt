@@ -50,6 +50,7 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
             this.mView.showEmptyListView()
         } else {
             this.weatherListAdapter.weatherRequestList = weatherList
+            this.mView.showAdapter()
             this.mView.setAdapter( this.weatherListAdapter )
         }
     }

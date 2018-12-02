@@ -8,15 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.google.gson.Gson
 import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
-import com.olkunmustafa.sampleweatherapp.model.Weather
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import java.util.function.Consumer
 
 open class WeatherListAdapter(
     private val context: Context,
@@ -24,7 +21,7 @@ open class WeatherListAdapter(
 ) : RecyclerView.Adapter<WeatherListAdapter.CardViewHolder>() {
 
     lateinit var weatherRequestList: List<WeatherRequest>
-    private var convertWeatherModelDis : Disposable? = null
+    private var convertWeatherModelDis: Disposable? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val rootView: View = LayoutInflater.from(context)
@@ -42,19 +39,17 @@ open class WeatherListAdapter(
         convertWeatherModelDis = icreateWeatherModel.convertWeatherModel(weatherRequest.weatherdata)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                Consumer<Weather> { weather ->
-                    holder.requestTime.text = weatherRequest.requestTime.toString()
-                    holder.temperature.text = weather.main.temp.toString()
-                    holder.location.text = weather.name
-                }
+            .subscribe { weather ->
+                holder.requestTime.text = weatherRequest.requestTime.toString()
+                holder.temperature.text = weather.main.temp.toString()
+                holder.location.text = weather.name
             }
 
     }
 
     fun destroy() {
         convertWeatherModelDis?.let {
-            if(!it.isDisposed){
+            if (!it.isDisposed) {
                 it.dispose()
             }
         }

@@ -7,7 +7,7 @@ import io.reactivex.Observable
 
 class WeatherListFromLocalDB(weatherDatabase: WeatherDatabase) : IWeatherListUtil {
 
-    var mWeatherRequestDao: WeatherRequestDao = weatherDatabase.weatherModel()
+    private var mWeatherRequestDao: WeatherRequestDao = weatherDatabase.weatherModel()
 
     override fun getWeatherRequestList(): Observable<List<WeatherRequest>> {
         return Observable.fromCallable {

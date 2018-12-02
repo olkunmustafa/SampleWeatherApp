@@ -6,9 +6,10 @@ import com.olkunmustafa.sampleweatherapp.data.storage.WeatherDatabase
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.CreateWeatherModelGson
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
+import com.olkunmustafa.sampleweatherapp.data.util.iconutil.IIconUtil
+import com.olkunmustafa.sampleweatherapp.data.util.iconutil.OpenWeatherMapIconUtil
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.FakeList
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherListUtil
-import com.olkunmustafa.sampleweatherapp.data.weatherlist.WeatherListFromLocalDB
 import com.olkunmustafa.sampleweatherapp.weatherlist.adapter.WeatherListAdapter
 import dagger.Module
 import dagger.Provides
@@ -20,19 +21,26 @@ class WeatherListModule {
     fun provideWeatherListAdapter(
         context: Context,
         iCreateWeatherModel: ICreateWeatherModel,
-        iDateUtil: IDateUtil
+        iDateUtil: IDateUtil,
+        iIconUtil: IIconUtil
     ): WeatherListAdapter {
-        return WeatherListAdapter(context, iCreateWeatherModel, iDateUtil)
+        return WeatherListAdapter(context, iCreateWeatherModel, iDateUtil, iIconUtil)
     }
 
     @Provides
     fun provideIWeatherListUtil(weatherDatabase: WeatherDatabase): IWeatherListUtil {
+//        return WeatherListFromLocalDB(weatherDatabase)
         return FakeList()
     }
 
     @Provides
     fun provideICreateWeatherModel(gson: Gson?): ICreateWeatherModel {
         return CreateWeatherModelGson(gson)
+    }
+
+    @Provides
+    fun provideIIconUtil(): IIconUtil {
+        return OpenWeatherMapIconUtil()
     }
 
 }

@@ -5,4 +5,6 @@
     <dimen name="cardview_mlr">@dimen/standart_space_for_app</dimen>
     <dimen name="cardview_list_item_p">@dimen/standart_space_for_app</dimen>
     <dimen name="cardview_item_wrapper_ptb">5dp</dimen>
+
+    <dimen name="no_data_ts">20sp</dimen>
 </resources>

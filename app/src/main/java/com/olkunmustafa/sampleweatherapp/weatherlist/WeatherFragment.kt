@@ -1,6 +1,7 @@
 package com.olkunmustafa.sampleweatherapp.weatherlist
 
 import android.os.Bundle
+import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -22,7 +23,10 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
     @BindView(R.id.weather_request_list)
     lateinit var weatherListRequestView: RecyclerView
 
-    lateinit var viewManager: RecyclerView.LayoutManager
+    @BindView(R.id.no_empty_view_text)
+    lateinit var noEmptyViewText : AppCompatTextView
+
+    private lateinit var viewManager: RecyclerView.LayoutManager
 
     companion object {
 
@@ -70,7 +74,8 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
     }
 
     override fun showEmptyListView() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if( this.noEmptyViewText.visibility == View.GONE )
+            this.noEmptyViewText.visibility = View.VISIBLE
     }
 
     override fun setAdapter(adapter: WeatherListAdapter) {

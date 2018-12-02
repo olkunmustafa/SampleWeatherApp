@@ -4,5 +4,8 @@
     <string name="request_time">Request Time</string>
     <string name="temperature">Temperature</string>
     <string name="location">Location</string>
+    <string name="no_data_text">Any record could not find in local database. To get new data from remote server please
+        touch the recort button.
+    </string>
 
 </resources>

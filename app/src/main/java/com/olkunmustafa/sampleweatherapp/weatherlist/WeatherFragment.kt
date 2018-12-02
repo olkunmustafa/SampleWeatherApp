@@ -49,13 +49,15 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
             .inject(this)
 
         this.presenter.setView(this)
-        this.presenter.created()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView: View = inflater.inflate(R.layout.fragment_weather, container, false)
 
         ButterKnife.bind(this, rootView)
+
+        this.presenter.created()
+
         return rootView
     }
 

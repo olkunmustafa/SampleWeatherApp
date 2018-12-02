@@ -16,6 +16,7 @@
             android:layout_gravity="center"
             android:gravity="center_horizontal"
             android:textSize="@dimen/no_data_ts"
+            android:visibility="gone"
     />
 
     <android.support.v7.widget.RecyclerView

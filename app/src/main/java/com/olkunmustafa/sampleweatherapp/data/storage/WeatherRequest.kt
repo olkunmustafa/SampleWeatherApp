@@ -3,9 +3,7 @@ package com.olkunmustafa.sampleweatherapp.data.storage
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import com.olkunmustafa.sampleweatherapp.model.Weather
 import java.sql.Date
-import java.time.Instant
 
 @Entity(tableName = "weatherrequest")
 class WeatherRequest {
@@ -15,9 +13,9 @@ class WeatherRequest {
     var uid: Int = 0
 
     @ColumnInfo(name = "requesttime")
-    lateinit var requestTime: Date
+    var requestTime: Date? = null
 
     @ColumnInfo(name = "weatherdata")
-    lateinit var weatherdata: String
+    var weatherdata: String? = null
 
 }

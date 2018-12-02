@@ -3,14 +3,12 @@ package com.olkunmustafa.sampleweatherapp.weatherlist
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherListUtil
 import com.olkunmustafa.sampleweatherapp.weatherlist.adapter.WeatherListAdapter
-import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class WeatherListPresenter @Inject constructor() : IWeatherListContract.Presenter {
+open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Presenter {
 
     private lateinit var weatherListDisposable: Disposable
     private lateinit var mView: IWeatherListContract.View
@@ -48,10 +46,11 @@ class WeatherListPresenter @Inject constructor() : IWeatherListContract.Presente
     }
 
     override fun getWeatherListOnNext(weatherList: List<WeatherRequest>) {
-        if (weatherList.isNotEmpty()) {
-            weatherListAdapter.weatherRequestList = weatherList
+        if (weatherList.isEmpty()) {
+            this.mView.showEmptyListView()
         } else {
-            mView.showEmptyListView()
+            this.weatherListAdapter.weatherRequestList = weatherList
+            this.mView.setAdapter( this.weatherListAdapter )
         }
     }
 

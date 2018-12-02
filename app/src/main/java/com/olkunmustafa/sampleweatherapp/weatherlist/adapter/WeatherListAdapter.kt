@@ -18,7 +18,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.function.Consumer
 
-class WeatherListAdapter(
+open class WeatherListAdapter(
     private val context: Context,
     private val icreateWeatherModel: ICreateWeatherModel
 ) : RecyclerView.Adapter<WeatherListAdapter.CardViewHolder>() {

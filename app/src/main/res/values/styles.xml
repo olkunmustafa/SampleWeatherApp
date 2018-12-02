@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CardItemKey">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CardItemTextWrapper">
+        <item name="android:layout_marginBottom">@dimen/cardview_item_wrapper_ptb</item>
+    </style>
+
 </resources>

@@ -11,13 +11,15 @@ import butterknife.ButterKnife
 import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
+import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 open class WeatherListAdapter(
     private val context: Context,
-    private val icreateWeatherModel: ICreateWeatherModel
+    private val icreateWeatherModel: ICreateWeatherModel,
+    private val iDateUtil: IDateUtil
 ) : RecyclerView.Adapter<WeatherListAdapter.CardViewHolder>() {
 
     lateinit var weatherRequestList: List<WeatherRequest>
@@ -40,7 +42,7 @@ open class WeatherListAdapter(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { weather ->
-                holder.requestTime.text = weatherRequest.requestTime.toString()
+                holder.requestTime.text = iDateUtil.formatDate(weatherRequest.requestTime!!)
                 holder.temperature.text = weather.main.temp.toString()
                 holder.location.text = weather.name
             }

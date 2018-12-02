@@ -4,6 +4,8 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherDatabase
+import com.olkunmustafa.sampleweatherapp.data.util.dateutil.FormatDate
+import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -28,6 +30,11 @@ class AppModule(var mContext: Context) {
         return GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
             .create()
+    }
+
+    @Provides
+    fun provideIDateUtil(): IDateUtil {
+        return FormatDate()
     }
 
 }

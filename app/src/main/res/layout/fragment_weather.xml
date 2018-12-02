@@ -24,6 +24,7 @@
             android:layout_height="match_parent"
             android:id="@+id/weather_request_list"
             android:visibility="gone"
+            android:layoutAnimation="@anim/layout_animation_fall_down"
     />
 
 </FrameLayout>

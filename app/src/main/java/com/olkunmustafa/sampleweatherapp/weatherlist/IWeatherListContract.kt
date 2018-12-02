@@ -26,9 +26,9 @@ interface IWeatherListContract {
 
         fun destroyed()
 
-        fun getWeatherListOnNext() : Consumer<List<WeatherRequest>>
+        fun getWeatherListOnNext( weatherList : List<WeatherRequest>)
 
-        fun getWeatherListOnError() : Consumer<Throwable>
+        fun getWeatherListOnError( throwable: Throwable )
 
     }
 

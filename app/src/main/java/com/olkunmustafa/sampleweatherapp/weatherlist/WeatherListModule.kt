@@ -2,6 +2,7 @@ package com.olkunmustafa.sampleweatherapp.weatherlist
 
 import android.content.Context
 import com.google.gson.Gson
+import com.olkunmustafa.sampleweatherapp.data.storage.WeatherDatabase
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.CreateWeatherModelGson
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherListUtil
@@ -19,8 +20,8 @@ class WeatherListModule {
     }
 
     @Provides
-    fun provideIWeatherListUtil(): IWeatherListUtil {
-        return WeatherListFromLocalDB()
+    fun provideIWeatherListUtil( weatherDatabase: WeatherDatabase ): IWeatherListUtil {
+        return WeatherListFromLocalDB( weatherDatabase )
     }
 
     @Provides

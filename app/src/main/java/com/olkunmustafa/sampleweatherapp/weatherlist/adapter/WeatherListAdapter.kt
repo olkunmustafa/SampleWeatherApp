@@ -14,6 +14,7 @@ import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
 import com.olkunmustafa.sampleweatherapp.data.util.iconutil.IIconUtil
+import com.olkunmustafa.sampleweatherapp.data.util.temperatureutil.ITemperatureUtil
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -23,7 +24,8 @@ open class WeatherListAdapter(
     private val context: Context,
     private val icreateWeatherModel: ICreateWeatherModel,
     private val iDateUtil: IDateUtil,
-    private val iIconUtil: IIconUtil
+    private val iIconUtil: IIconUtil,
+    private val iTemperatureUtil: ITemperatureUtil
 ) : RecyclerView.Adapter<WeatherListAdapter.CardViewHolder>() {
 
     lateinit var weatherRequestList: List<WeatherRequest>
@@ -47,7 +49,8 @@ open class WeatherListAdapter(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { weather ->
                 holder.requestTime.text = iDateUtil.formatDate(weatherRequest.requestTime!!)
-//                holder.temperature.text = weather.main.temp.toString()
+                holder.currentTemperature.text = iTemperatureUtil.getStyledTemperature( weather.main.temp )
+                holder.currentMinMax.text = iTemperatureUtil.getStyledMinMaxTemperature( weather.main.tempMin, weather.main.tempMax )
                 holder.location.text = weather.name
 
                 weather.weather?.get(0)?.icon?.let {

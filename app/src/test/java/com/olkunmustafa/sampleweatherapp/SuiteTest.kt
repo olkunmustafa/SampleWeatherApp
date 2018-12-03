@@ -1,0 +1,16 @@
+package com.olkunmustafa.sampleweatherapp
+
+import com.olkunmustafa.sampleweatherapp.data.util.dateutil.FormatDateTest
+import com.olkunmustafa.sampleweatherapp.data.util.temperatureutil.FormattedTemperatureTest
+import com.olkunmustafa.sampleweatherapp.weatherlist.WeatherListPresenterTest
+import org.junit.runner.RunWith
+import org.junit.runners.Suite
+
+@RunWith(Suite::class)
+@Suite.SuiteClasses(
+    FormatDateTest::class,
+    FormattedTemperatureTest::class,
+    WeatherListPresenterTest::class
+)
+class SuiteTest {
+}

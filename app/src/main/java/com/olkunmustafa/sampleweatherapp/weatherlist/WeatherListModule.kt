@@ -9,7 +9,7 @@ import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
 import com.olkunmustafa.sampleweatherapp.data.util.iconutil.IIconUtil
 import com.olkunmustafa.sampleweatherapp.data.util.iconutil.OpenWeatherMapIconUtil
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.FakeList
-import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherListUtil
+import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
 import com.olkunmustafa.sampleweatherapp.weatherlist.adapter.WeatherListAdapter
 import dagger.Module
 import dagger.Provides
@@ -28,7 +28,7 @@ class WeatherListModule {
     }
 
     @Provides
-    fun provideIWeatherListUtil(weatherDatabase: WeatherDatabase): IWeatherListUtil {
+    fun provideIWeatherListUtil(weatherDatabase: WeatherDatabase): IWeatherUtil {
 //        return WeatherListFromLocalDB(weatherDatabase)
         return FakeList()
     }

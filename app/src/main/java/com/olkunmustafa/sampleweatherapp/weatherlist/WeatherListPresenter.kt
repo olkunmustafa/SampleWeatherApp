@@ -1,13 +1,12 @@
 package com.olkunmustafa.sampleweatherapp.weatherlist
 
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
-import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherListUtil
+import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
 import com.olkunmustafa.sampleweatherapp.weatherlist.adapter.WeatherListAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import javax.inject.Named
 
 open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Presenter {
 
@@ -15,7 +14,7 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
     private lateinit var mView: IWeatherListContract.View
 
     @Inject
-    lateinit var iWeatherListUtil: IWeatherListUtil
+    lateinit var iWeatherListUtil: IWeatherUtil
 
     @Inject
     lateinit var weatherListAdapter: WeatherListAdapter

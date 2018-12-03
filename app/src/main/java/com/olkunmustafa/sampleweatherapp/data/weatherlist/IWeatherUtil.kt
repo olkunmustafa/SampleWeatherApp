@@ -15,7 +15,7 @@ import io.reactivex.Observable
  * @since 0.1
  * @author Mustafa Olkun
  */
-interface IWeatherListUtil {
+interface IWeatherUtil {
 
     /**
      * Responsible to get weather request list.
@@ -24,5 +24,13 @@ interface IWeatherListUtil {
      * @author Mustafa Olkun
      */
     fun getWeatherRequestList(): Observable<List<WeatherRequest>>
+
+    /**
+     * Calls a spesific weather
+     *
+     * @sinve 0.2
+     * @author Mustafa Olkun
+     */
+    fun getWeather(id: Int): Observable<WeatherRequest>
 
 }

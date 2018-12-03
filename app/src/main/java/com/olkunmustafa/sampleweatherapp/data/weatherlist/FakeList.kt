@@ -5,7 +5,7 @@ import io.reactivex.Observable
 import java.sql.Date
 import java.util.*
 
-class FakeList : IWeatherListUtil {
+class FakeList : IWeatherUtil {
 
     val test = "{\n" +
             "    \"coord\": {\n" +
@@ -22,28 +22,28 @@ class FakeList : IWeatherListUtil {
             "    ],\n" +
             "    \"base\": \"stations\",\n" +
             "    \"main\": {\n" +
-            "        \"temp\": 285.62,\n" +
-            "        \"pressure\": 1021,\n" +
-            "        \"humidity\": 66,\n" +
-            "        \"temp_min\": 285.15,\n" +
-            "        \"temp_max\": 286.15\n" +
+            "        \"temp\": 10.42,\n" +
+            "        \"pressure\": 1019,\n" +
+            "        \"humidity\": 76,\n" +
+            "        \"temp_min\": 9,\n" +
+            "        \"temp_max\": 12\n" +
             "    },\n" +
             "    \"visibility\": 10000,\n" +
             "    \"wind\": {\n" +
-            "        \"speed\": 4.6,\n" +
-            "        \"deg\": 20\n" +
+            "        \"speed\": 3.1,\n" +
+            "        \"deg\": 60\n" +
             "    },\n" +
             "    \"clouds\": {\n" +
             "        \"all\": 75\n" +
             "    },\n" +
-            "    \"dt\": 1543751400,\n" +
+            "    \"dt\": 1543821600,\n" +
             "    \"sys\": {\n" +
             "        \"type\": 1,\n" +
             "        \"id\": 6970,\n" +
-            "        \"message\": 0.0031,\n" +
+            "        \"message\": 0.1832,\n" +
             "        \"country\": \"TR\",\n" +
-            "        \"sunrise\": 1543727458,\n" +
-            "        \"sunset\": 1543761379\n" +
+            "        \"sunrise\": 1543813907,\n" +
+            "        \"sunset\": 1543847769\n" +
             "    },\n" +
             "    \"id\": 745044,\n" +
             "    \"name\": \"Istanbul\",\n" +
@@ -110,5 +110,14 @@ class FakeList : IWeatherListUtil {
 
         return Observable.just( fakeList )
     }
+
+   override fun getWeather(id: Int): Observable<WeatherRequest> {
+      val weatherRequest : WeatherRequest = WeatherRequest()
+      weatherRequest.requestTime = Date(Calendar.getInstance().timeInMillis)
+      weatherRequest.weatherdata = test
+      weatherRequest.uid = 1
+
+      return Observable.just( weatherRequest )
+   }
 
 }

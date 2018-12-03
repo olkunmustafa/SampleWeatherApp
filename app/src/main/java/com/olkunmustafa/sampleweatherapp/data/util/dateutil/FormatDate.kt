@@ -7,7 +7,7 @@ import java.util.*
 class FormatDate : IDateUtil {
 
     override fun formatDate(date: Date): String {
-        val format = SimpleDateFormat("dd-MM-YYY", Locale.getDefault())
+        val format = SimpleDateFormat("dd MMMM YYY", Locale.getDefault())
         return format.format(date)
     }
 

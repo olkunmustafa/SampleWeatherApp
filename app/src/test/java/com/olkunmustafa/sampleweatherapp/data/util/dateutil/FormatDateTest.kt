@@ -20,7 +20,7 @@ class FormatDateTest {
 
         // Given
         val givenTimeStamp = 1543768462000L
-        val expected = "02-12-2018"
+        val expected = "02 December 2018"
         val fakeDate = Date(givenTimeStamp)
 
         // When

@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.olkunmustafa.sampleweatherapp.AppModule
 import com.olkunmustafa.sampleweatherapp.R
-import com.olkunmustafa.sampleweatherapp.weatherlist.WeatherFragment
+import com.olkunmustafa.sampleweatherapp.weatherlist.WeatherListFragment
 import javax.inject.Inject
 
 class WeatherActivity : AppCompatActivity(), IWeatherContract.View {
@@ -27,7 +27,7 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View {
 
     override fun replaceFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.container, WeatherFragment.newInstance())
+            .add(R.id.container, WeatherListFragment.newInstance())
             .commit()
     }
 }

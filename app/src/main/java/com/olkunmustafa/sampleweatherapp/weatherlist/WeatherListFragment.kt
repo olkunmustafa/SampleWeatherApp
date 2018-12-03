@@ -15,7 +15,7 @@ import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.weatherlist.adapter.WeatherListAdapter
 import javax.inject.Inject
 
-class WeatherFragment : BaseFragment(), IWeatherListContract.View {
+class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
 
     @Inject
     lateinit var presenter: WeatherListPresenter
@@ -30,9 +30,9 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
 
     companion object {
 
-        fun newInstance(): WeatherFragment {
+        fun newInstance(): WeatherListFragment {
             val args = Bundle()
-            val fragment = WeatherFragment()
+            val fragment = WeatherListFragment()
 
             fragment.arguments = args
             return fragment

@@ -52,7 +52,7 @@ class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView: View = inflater.inflate(R.layout.fragment_weather, container, false)
+        val rootView: View = inflater.inflate(R.layout.fragment_weather_list, container, false)
 
         ButterKnife.bind(this, rootView)
 

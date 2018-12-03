@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:layout_width="@dimen/detail_item_view_w"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:gravity="center_horizontal"
+        android:paddingTop="@dimen/detail_wrapper_item_ptb"
+        android:paddingBottom="@dimen/detail_wrapper_item_ptb"
+>
+
+    <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_key"
+            android:text="Sunset"
+            android:textStyle="bold"
+            android:textSize="18sp"
+    />
+
+    <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_value"
+            android:text="05:20"
+            android:textSize="16sp"
+    />
+
+</LinearLayout>

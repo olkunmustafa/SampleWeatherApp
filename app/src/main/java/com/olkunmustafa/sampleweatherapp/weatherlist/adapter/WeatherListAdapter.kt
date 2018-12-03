@@ -47,7 +47,7 @@ open class WeatherListAdapter(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { weather ->
                 holder.requestTime.text = iDateUtil.formatDate(weatherRequest.requestTime!!)
-                holder.temperature.text = weather.main.temp.toString()
+//                holder.temperature.text = weather.main.temp.toString()
                 holder.location.text = weather.name
 
                 weather.weather?.get(0)?.icon?.let {
@@ -70,11 +70,14 @@ open class WeatherListAdapter(
 
     class CardViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 
+        @BindView(R.id.current_temperature)
+        lateinit var currentTemperature : AppCompatTextView
+
+        @BindView(R.id.current_min_max)
+        lateinit var currentMinMax : AppCompatTextView
+
         @BindView(R.id.request_time)
         lateinit var requestTime: AppCompatTextView
-
-        @BindView(R.id.temperature)
-        lateinit var temperature: AppCompatTextView
 
         @BindView(R.id.location)
         lateinit var location: AppCompatTextView

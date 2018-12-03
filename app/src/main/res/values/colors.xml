@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="wonderful_day">#70A6B9</color>
+    <color name="sharpie">#1A1C19</color>
+    <color name="gravel">#5E5E5E</color>
 </resources>

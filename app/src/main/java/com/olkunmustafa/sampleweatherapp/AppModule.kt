@@ -6,6 +6,8 @@ import com.google.gson.GsonBuilder
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherDatabase
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.FormatDate
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
+import com.olkunmustafa.sampleweatherapp.data.util.temperatureutil.FormattedTemperature
+import com.olkunmustafa.sampleweatherapp.data.util.temperatureutil.ITemperatureUtil
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -35,6 +37,11 @@ class AppModule(var mContext: Context) {
     @Provides
     fun provideIDateUtil(): IDateUtil {
         return FormatDate()
+    }
+
+    @Provides
+    fun provideITemperatureUtil() : ITemperatureUtil {
+        return FormattedTemperature()
     }
 
 }

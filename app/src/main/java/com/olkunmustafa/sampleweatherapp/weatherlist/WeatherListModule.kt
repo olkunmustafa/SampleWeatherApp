@@ -8,6 +8,7 @@ import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherMod
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
 import com.olkunmustafa.sampleweatherapp.data.util.iconutil.IIconUtil
 import com.olkunmustafa.sampleweatherapp.data.util.iconutil.OpenWeatherMapIconUtil
+import com.olkunmustafa.sampleweatherapp.data.util.temperatureutil.ITemperatureUtil
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.FakeList
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
 import com.olkunmustafa.sampleweatherapp.weatherlist.adapter.WeatherListAdapter
@@ -22,9 +23,10 @@ class WeatherListModule {
         context: Context,
         iCreateWeatherModel: ICreateWeatherModel,
         iDateUtil: IDateUtil,
-        iIconUtil: IIconUtil
+        iIconUtil: IIconUtil,
+        iTemperatureUtil: ITemperatureUtil
     ): WeatherListAdapter {
-        return WeatherListAdapter(context, iCreateWeatherModel, iDateUtil, iIconUtil)
+        return WeatherListAdapter(context, iCreateWeatherModel, iDateUtil, iIconUtil, iTemperatureUtil)
     }
 
     @Provides

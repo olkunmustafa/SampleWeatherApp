@@ -2,18 +2,17 @@ package com.olkunmustafa.sampleweatherapp.weatherdetail.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.olkunmustafa.sampleweatherapp.R;
 
 import javax.annotation.Nullable;
 
-public class DetailItemView extends FrameLayout {
+public class DetailItemView extends LinearLayout {
 
     private Context mContext;
     private AttributeSet mAttributeSet;
@@ -26,11 +25,11 @@ public class DetailItemView extends FrameLayout {
     AppCompatTextView detailValue;
 
     public DetailItemView(Context context) {
-        this(context,null, 0);
+        this(context, null, 0);
     }
 
     public DetailItemView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public DetailItemView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -42,35 +41,31 @@ public class DetailItemView extends FrameLayout {
     }
 
     private void init() {
-        LayoutInflater inflater = ( LayoutInflater ) this.mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-        View rootView = inflater.inflate( R.layout.detail_item_group_view, null, false );
+        inflate(mContext, R.layout.detail_item_group_view, this);
 
         TypedArray a = mContext.getTheme().obtainStyledAttributes(
                 this.mAttributeSet,
                 R.styleable.DetailItemView,
-                0, 0 );
+                0, 0);
 
         try {
-            this.mDetailTitle = a.getString( R.styleable.DetailItemView_detail_title );
+            this.mDetailTitle = a.getString(R.styleable.DetailItemView_detail_title);
 
         } finally {
             a.recycle();
         }
 
+        int wrapperPaddingTB = mContext.getResources().getDimensionPixelOffset(R.dimen.detail_wrapper_item_ptb);
+        this.setPadding(0, wrapperPaddingTB, 0, wrapperPaddingTB);
+        this.setOrientation(LinearLayout.VERTICAL);
+        this.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.sandy_sand));
 
-        FrameLayout.LayoutParams params =
-                new LayoutParams(
-                        LayoutParams.WRAP_CONTENT,
-                        LayoutParams.WRAP_CONTENT
-                );
-        this.setLayoutParams(params);
-
-        ButterKnife.bind( this, rootView );
-        this.addView( rootView );
-        this.setDetailKey( this.mDetailTitle );
+        ButterKnife.bind(this);
+        this.setDetailKey(this.mDetailTitle);
     }
 
     public void setDetailKey(String title) {
-        this.mDetailKey.setText( title );
+        this.mDetailKey.setText(title);
     }
+
 }

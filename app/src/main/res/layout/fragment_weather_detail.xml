@@ -98,26 +98,32 @@
         <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
                 android:id="@+id/wind_speed"
                 app:detail_title="@string/wind_speed"
+                style="@style/DetailItemViewStyle"
         />
         <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
                 android:id="@+id/wind_degree"
                 app:detail_title="@string/wind_degree"
+                style="@style/DetailItemViewStyle"
         />
         <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
                 android:id="@+id/humdity"
                 app:detail_title="@string/humidity"
+                style="@style/DetailItemViewStyle"
         />
         <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
                 android:id="@+id/sunrise"
                 app:detail_title="@string/sunrise"
+                style="@style/DetailItemViewStyle"
         />
         <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
                 android:id="@+id/sunset"
                 app:detail_title="@string/sunset"
+                style="@style/DetailItemViewStyle"
         />
         <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
                 android:id="@+id/visibility"
                 app:detail_title="@string/visibility"
+                style="@style/DetailItemViewStyle"
         />
 
     </GridLayout>

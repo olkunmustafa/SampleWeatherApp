@@ -8,6 +8,7 @@ import com.olkunmustafa.sampleweatherapp.data.util.iconutil.IIconUtil
 import com.olkunmustafa.sampleweatherapp.data.util.iconutil.OpenWeatherMapIconUtil
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.FakeList
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
+import com.olkunmustafa.sampleweatherapp.weatherdetail.util.ArgumentUtil
 import dagger.Module
 import dagger.Provides
 
@@ -28,5 +29,10 @@ class WeatherDetailModule {
     @Provides
     fun provideIIconUtil(): IIconUtil {
         return OpenWeatherMapIconUtil()
+    }
+
+    @Provides
+    fun provideArgumentUtil(): ArgumentUtil {
+        return ArgumentUtil()
     }
 }

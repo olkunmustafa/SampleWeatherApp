@@ -4,8 +4,6 @@ import android.os.Bundle
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
 import com.olkunmustafa.sampleweatherapp.weatherdetail.util.ArgumentUtil
-import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 

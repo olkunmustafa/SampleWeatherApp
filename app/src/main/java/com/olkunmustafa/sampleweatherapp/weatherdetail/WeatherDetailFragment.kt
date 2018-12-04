@@ -20,6 +20,7 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
         fun newInstance( id : Int ): WeatherDetailFragment {
             val args = Bundle()
             val fragment = WeatherDetailFragment()
+            args.putInt(WeatherDetailConstants.RECORD_ID, id)
 
             fragment.arguments = args
             return fragment
@@ -43,6 +44,8 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
         val rootView = inflater.inflate(R.layout.fragment_weather_detail, container, false)
 
         ButterKnife.bind(this, rootView)
+
+        this.presenter.created( arguments )
         return rootView
     }
 

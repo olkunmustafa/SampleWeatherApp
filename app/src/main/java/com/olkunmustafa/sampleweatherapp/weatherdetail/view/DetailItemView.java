@@ -22,7 +22,7 @@ public class DetailItemView extends LinearLayout {
     AppCompatTextView mDetailKey;
 
     @BindView(R.id.detail_value)
-    AppCompatTextView detailValue;
+    AppCompatTextView mDetailValue;
 
     public DetailItemView(Context context) {
         this(context, null, 0);
@@ -66,6 +66,10 @@ public class DetailItemView extends LinearLayout {
 
     public void setDetailKey(String title) {
         this.mDetailKey.setText(title);
+    }
+
+    public void setDetailValue( String value ){
+        this.mDetailValue.setText(value);
     }
 
 }

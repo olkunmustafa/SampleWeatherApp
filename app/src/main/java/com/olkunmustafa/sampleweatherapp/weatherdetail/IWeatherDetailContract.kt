@@ -7,6 +7,30 @@ interface IWeatherDetailContract {
 
     interface View {
 
+        fun setTemperatureIcon(url: String)
+
+        fun setCurrentTemperature(temperature: String)
+
+        fun setCurrentMinMax(minMax: String)
+
+        fun setLocation(location: String)
+
+        fun setRequestTime(time: String)
+
+        fun setDescription(description: String)
+
+        fun setWindSpeed(speed: String)
+
+        fun setWindDegree(degree: String)
+
+        fun setHumidity(humidity: String)
+
+        fun setSunrise(sunrise: String)
+
+        fun setSunset(sunset: String)
+
+        fun setVisibility( visibility : String )
+
     }
 
     interface Presenter {
@@ -14,7 +38,7 @@ interface IWeatherDetailContract {
 
         fun setView(view: View)
 
-        fun created( args : Bundle? )
+        fun created(args: Bundle?)
 
     }
 

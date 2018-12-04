@@ -110,7 +110,7 @@
                 style="@style/DetailItemViewStyle"
         />
         <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
-                android:id="@+id/humdity"
+                android:id="@+id/humidity"
                 app:detail_title="@string/humidity"
                 style="@style/DetailItemViewStyle"
         />

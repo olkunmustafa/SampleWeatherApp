@@ -23,8 +23,8 @@ class ArgumentUtil {
     fun checkArgRecordContains(args: Bundle): Observable<Int> {
 
         return Observable.just( args )
-            .flatMap { args ->
-                if( args.containsKey( WeatherDetailConstants.RECORD_ID ) ){
+            .flatMap { it ->
+                if( it.containsKey( WeatherDetailConstants.RECORD_ID ) ){
                     Observable.just(args.getInt(  WeatherDetailConstants.RECORD_ID ))
                 } else {
                     Observable.error(NoSuchElementException( "To call the selected weather from local database, RecordID should not be null" ))

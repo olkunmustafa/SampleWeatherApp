@@ -30,12 +30,24 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
     override fun replaceFragment() {
         supportFragmentManager.beginTransaction()
             .add(R.id.container, WeatherListFragment.newInstance())
+            .addToBackStack(null)
             .commit()
     }
 
     override fun openDetailFragment(dataID: Int) {
         supportFragmentManager.beginTransaction()
             .add(R.id.container, WeatherDetailFragment.newInstance(dataID))
+            .addToBackStack(null)
             .commit()
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 1) {
+            super.onBackPressed()
+
+        } else {
+            this.finish()
+
+        }
     }
 }

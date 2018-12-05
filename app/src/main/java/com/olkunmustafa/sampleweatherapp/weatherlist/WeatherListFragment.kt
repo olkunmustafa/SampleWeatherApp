@@ -1,5 +1,6 @@
 package com.olkunmustafa.sampleweatherapp.weatherlist
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import com.olkunmustafa.sampleweatherapp.AppModule
 import com.olkunmustafa.sampleweatherapp.BaseFragment
 import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.weatherlist.adapter.WeatherListAdapter
+import com.olkunmustafa.sampleweatherapp.weathermain.listener.IFragmentListener
 import javax.inject.Inject
 
 class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
@@ -40,13 +42,18 @@ class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
         DaggerWeatherListComponent.builder()
             .appModule(AppModule(activity!!))
             .build()
             .inject(this)
+
+        presenter.attached(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         this.presenter.setView(this)
     }

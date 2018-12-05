@@ -1,7 +1,9 @@
 package com.olkunmustafa.sampleweatherapp.weatherlist
 
+import android.content.Context
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.weatherlist.adapter.WeatherListAdapter
+import com.olkunmustafa.sampleweatherapp.weathermain.listener.IFragmentListener
 import java.util.function.Consumer
 
 interface IWeatherListContract {
@@ -16,7 +18,7 @@ interface IWeatherListContract {
 
         fun showAdapter()
 
-        fun setAdapter( adapter : WeatherListAdapter )
+        fun setAdapter(adapter: WeatherListAdapter)
 
     }
 
@@ -24,13 +26,15 @@ interface IWeatherListContract {
 
         fun setView(view: View)
 
+        fun attached(context: Context?)
+
         fun created()
 
         fun destroyed()
 
-        fun getWeatherListOnNext( weatherList : List<WeatherRequest>)
+        fun getWeatherListOnNext(weatherList: List<WeatherRequest>)
 
-        fun getWeatherListOnError( throwable: Throwable )
+        fun getWeatherListOnError(throwable: Throwable)
 
     }
 

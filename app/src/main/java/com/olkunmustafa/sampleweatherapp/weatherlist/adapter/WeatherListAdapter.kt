@@ -3,12 +3,14 @@ package com.olkunmustafa.sampleweatherapp.weatherlist.adapter
 import android.content.Context
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
@@ -19,6 +21,7 @@ import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 
 open class WeatherListAdapter(
     private val context: Context,
@@ -30,6 +33,7 @@ open class WeatherListAdapter(
 
     lateinit var weatherRequestList: List<WeatherRequest>
     private var convertWeatherModelDis: Disposable? = null
+    public val clickSubject = PublishSubject.create<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val rootView: View = LayoutInflater.from(context)
@@ -59,6 +63,10 @@ open class WeatherListAdapter(
                         .load(iIconUtil.getIconFullUrl(it))
                         .into(holder.temperatureIcon)
                 }
+
+                holder.mainCardWrapper.setOnClickListener {
+                    clickSubject.onNext(weatherRequest.uid)
+                }
             }
 
     }
@@ -72,6 +80,9 @@ open class WeatherListAdapter(
     }
 
     class CardViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
+
+        @BindView(R.id.main_card_wrapper)
+        lateinit var mainCardWrapper : CardView
 
         @BindView(R.id.current_temperature)
         lateinit var currentTemperature : AppCompatTextView

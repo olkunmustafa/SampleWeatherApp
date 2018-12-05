@@ -42,4 +42,15 @@ class CheckWeatherObject(
                 this.iTemperatureUtil.getStyledMinMaxTemperature(it.main.tempMin, it.main.tempMax)
             }
     }
+
+    override fun getLocationName(weather: Weather): Observable<String> {
+        return Observable.just(weather)
+            .map {
+                if( it.name == null ){
+                    throw IllegalArgumentException("To show suitable location, name object should not be null in weather")
+                }
+
+                 it.name
+            }
+    }
 }

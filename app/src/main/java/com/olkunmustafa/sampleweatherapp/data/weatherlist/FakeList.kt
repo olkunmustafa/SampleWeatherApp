@@ -46,7 +46,7 @@ class FakeList : IWeatherUtil {
             "        \"sunset\": 1543847769\n" +
             "    },\n" +
             "    \"id\": 745044,\n" +
-            "    \"name\": \"Istanbul\",\n" +
+            "    \"name\": \"Ankara\",\n" +
             "    \"cod\": 200\n" +
             "}"
 

@@ -30,6 +30,7 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
     @Inject
     lateinit var iCreateWeatherModel: ICreateWeatherModel
 
+    @Inject
     lateinit var iCheckWeatherUtil: ICheckWeatherUtil
 
     override fun setView(view: IWeatherDetailContract.View) {
@@ -51,7 +52,7 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
                     }
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+            .subscribe { it -> weatherRequestOnNext(it) }
 
     }
 
@@ -67,11 +68,22 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
         this.weather = weather
 
         this.temperatureIcon()
+        this.mainTemperature()
+        this.minMaxTemperature()
+        this.location()
+        this.requestTime()
+        this.windSpeed()
+        this.windDegree()
+        this.humidity()
+        this.sunrise()
+        this.sunset()
+        this.visibility()
     }
 
     @SuppressLint("CheckResult")
     override fun temperatureIcon() {
         this.iCheckWeatherUtil.getTemperatureIconUrl(this.weather)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { uri -> view.setTemperatureIcon(uri) },
@@ -86,6 +98,7 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
     @SuppressLint("CheckResult")
     override fun mainTemperature() {
         this.iCheckWeatherUtil.getCurrentTemperatureText(this.weather)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { view.setCurrentTemperature(it) },
@@ -100,6 +113,7 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
     @SuppressLint("CheckResult")
     override fun minMaxTemperature() {
         this.iCheckWeatherUtil.getMinMaxTemperatureText(this.weather)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { view.setCurrentMinMax(it) },
@@ -111,7 +125,19 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
             )
     }
 
+    @SuppressLint("CheckResult")
     override fun location() {
+        this.iCheckWeatherUtil.getLocationName(weather)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { view.setLocation(it) },
+                { error ->
+                    error.printStackTrace()
+                    // TODO show an error message if we cannot show location!
+                    // TODO Send event to developers!
+                }
+            )
     }
 
     override fun requestTime() {

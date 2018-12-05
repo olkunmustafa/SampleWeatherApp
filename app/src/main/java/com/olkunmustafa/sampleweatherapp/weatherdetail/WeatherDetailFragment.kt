@@ -13,6 +13,7 @@ import com.olkunmustafa.sampleweatherapp.BaseFragment
 import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
 import com.olkunmustafa.sampleweatherapp.weatherlist.WeatherListFragment
+import com.squareup.picasso.Picasso
 import javax.inject.Inject
 import kotlin.math.min
 
@@ -22,43 +23,43 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
     lateinit var presenter: WeatherDetailPresenter
 
     @BindView(R.id.temperature_icon)
-    lateinit var temperatureIcon : AppCompatImageView
+    lateinit var temperatureIcon: AppCompatImageView
 
     @BindView(R.id.current_temperature)
-    lateinit var currentTemperature : AppCompatTextView
+    lateinit var currentTemperature: AppCompatTextView
 
     @BindView(R.id.current_min_max)
-    lateinit var currentMinMax : AppCompatTextView
+    lateinit var currentMinMax: AppCompatTextView
 
     @BindView(R.id.location)
-    lateinit var location : AppCompatTextView
+    lateinit var location: AppCompatTextView
 
     @BindView(R.id.request_time)
-    lateinit var requestTime : AppCompatTextView
+    lateinit var requestTime: AppCompatTextView
 
     @BindView(R.id.description)
-    lateinit var description : AppCompatTextView
+    lateinit var description: AppCompatTextView
 
     @BindView(R.id.wind_speed)
-    lateinit var windSpeed : DetailItemView
+    lateinit var windSpeed: DetailItemView
 
     @BindView(R.id.wind_degree)
-    lateinit var windDegree : DetailItemView
+    lateinit var windDegree: DetailItemView
 
     @BindView(R.id.humidity)
-    lateinit var humidity : DetailItemView
+    lateinit var humidity: DetailItemView
 
     @BindView(R.id.sunrise)
-    lateinit var sunrise : DetailItemView
+    lateinit var sunrise: DetailItemView
 
     @BindView(R.id.sunset)
-    lateinit var sunset : DetailItemView
+    lateinit var sunset: DetailItemView
 
     @BindView(R.id.visibility)
-    lateinit var visibility : DetailItemView
+    lateinit var visibility: DetailItemView
 
     companion object {
-        fun newInstance( id : Int ): WeatherDetailFragment {
+        fun newInstance(id: Int): WeatherDetailFragment {
             val args = Bundle()
             val fragment = WeatherDetailFragment()
             args.putInt(WeatherDetailConstants.RECORD_ID, id)
@@ -73,7 +74,7 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
 
         DaggerWeatherDetailComponent.builder()
             .appModule(AppModule(activity!!))
-            .weatherDetailModule( WeatherDetailModule() )
+            .weatherDetailModule(WeatherDetailModule())
             .build()
             .inject(this)
 
@@ -86,11 +87,21 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
 
         ButterKnife.bind(this, rootView)
 
-        this.presenter.created( arguments )
+        this.presenter.created(arguments)
         return rootView
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        this.presenter.destroyed()
+    }
+
     override fun setTemperatureIcon(url: String) {
+        Picasso
+            .with(this.context)
+            .load(url)
+            .into(this.temperatureIcon)
     }
 
     override fun setCurrentTemperature(temperature: String) {

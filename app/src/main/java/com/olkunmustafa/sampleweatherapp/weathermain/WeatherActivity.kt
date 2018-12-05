@@ -1,5 +1,6 @@
 package com.olkunmustafa.sampleweatherapp.weathermain
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -22,6 +23,7 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
 
         DaggerWeatherComponent.builder()
             .appModule(AppModule(this))
+            .weatherModule(WeatherModule(this))
             .build()
             .inject(this)
 
@@ -38,7 +40,7 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
         // Handle item selection
         return when (item.itemId) {
             R.id.send_new_request -> {
-                // Todo something.
+                presenter.saveButtonClicked()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -67,5 +69,11 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
             this.finish()
 
         }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        presenter.activityResult( requestCode, resultCode, data )
     }
 }

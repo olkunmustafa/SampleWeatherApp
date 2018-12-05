@@ -78,7 +78,7 @@ public class ApiClient {
      * @return Creates the service accoring to suit the response
      * @since 0.1.6
      */
-    public static < S > S createService( Class< S > serviceClass ) {
+    public < S > S createService( Class< S > serviceClass ) {
         return getClient().create( serviceClass );
 
     }
@@ -87,7 +87,7 @@ public class ApiClient {
      * @return Retrofit client for API
      * @since 0.1.6
      */
-    private static Retrofit getClient() {
+    private Retrofit getClient() {
 
         init();
         if ( retrofit == null ) {

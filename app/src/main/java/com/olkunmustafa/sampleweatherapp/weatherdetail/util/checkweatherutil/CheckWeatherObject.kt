@@ -31,4 +31,15 @@ class CheckWeatherObject(
                 this.iTemperatureUtil.getStyledTemperature(it.main.temp)
             }
     }
+
+    override fun getMinMaxTemperatureText(weather: Weather): Observable<String> {
+        return Observable.just(weather)
+            .map {
+                if( it.main == null ){
+                    throw java.lang.IllegalArgumentException( "To show suitable min and max temperature, Main object shpuld not be null" )
+                }
+
+                this.iTemperatureUtil.getStyledMinMaxTemperature(it.main.tempMin, it.main.tempMax)
+            }
+    }
 }

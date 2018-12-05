@@ -97,4 +97,41 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
             )
     }
 
+    @SuppressLint("CheckResult")
+    override fun minMaxTemperature() {
+        this.iCheckWeatherUtil.getMinMaxTemperatureText(this.weather)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { view.setCurrentMinMax(it) },
+                { error ->
+                    error.printStackTrace()
+                    // TODO show an error message if we cannot show temperature!
+                    // TODO Send event to developers!
+                }
+            )
+    }
+
+    override fun location() {
+    }
+
+    override fun requestTime() {
+    }
+
+    override fun windSpeed() {
+    }
+
+    override fun windDegree() {
+    }
+
+    override fun humidity() {
+    }
+
+    override fun sunrise() {
+    }
+
+    override fun sunset() {
+    }
+
+    override fun visibility() {
+    }
 }

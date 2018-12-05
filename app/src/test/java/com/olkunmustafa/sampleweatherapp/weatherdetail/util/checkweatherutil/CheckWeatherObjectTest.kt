@@ -20,19 +20,19 @@ class CheckWeatherObjectTest {
     lateinit var mockIconUtil: IIconUtil
 
     @Mock
-    lateinit var mockWeather : Weather
+    lateinit var mockWeather: Weather
 
     @Mock
-    lateinit var mockWeatherList : List<Weather_>
+    lateinit var mockWeatherList: List<Weather_>
 
     @Mock
-    lateinit var mockWeather_ : Weather_
+    lateinit var mockWeather_: Weather_
 
     @Mock
-    lateinit var mockTemperatureUtil : ITemperatureUtil
+    lateinit var mockTemperatureUtil: ITemperatureUtil
 
     @Mock
-    lateinit var mockMain : Main
+    lateinit var mockMain: Main
 
     @Before
     fun setUp() {
@@ -44,7 +44,7 @@ class CheckWeatherObjectTest {
         )
 
         Mockito
-            .doReturn( this.mockWeatherList )
+            .doReturn(this.mockWeatherList)
             .`when`(this.mockWeather)
             .weather
 
@@ -54,22 +54,22 @@ class CheckWeatherObjectTest {
     fun getTemperatureIconUrl_ShouldError_IfWeatherSizeEqualsZero() {
 
         // Given
-        val testObserver : TestObserver<String> = TestObserver()
+        val testObserver: TestObserver<String> = TestObserver()
 
         Mockito
-            .doReturn( 0 )
+            .doReturn(0)
             .`when`(this.mockWeatherList)
             .size
 
         // When
         this.checkWeatherObject
-            .getTemperatureIconUrl( this.mockWeather )
+            .getTemperatureIconUrl(this.mockWeather)
             .subscribe(testObserver)
 
         // Then
         testObserver
             .assertNotComplete()
-            .assertError( IllegalArgumentException::class.java )
+            .assertError(IllegalArgumentException::class.java)
 
     }
 
@@ -77,31 +77,31 @@ class CheckWeatherObjectTest {
     fun getTemperatureIconUrl_ShouldErrorIfIconIsEmpty() {
 
         // Given
-        val testObserver : TestObserver<String> = TestObserver()
+        val testObserver: TestObserver<String> = TestObserver()
 
         Mockito
-            .doReturn( 1 )
+            .doReturn(1)
             .`when`(this.mockWeatherList)
             .size
 
         Mockito
-            .doReturn( "" )
+            .doReturn("")
             .`when`(this.mockWeather_)
             .icon
 
         Mockito
-            .doReturn( this.mockWeather_ )
+            .doReturn(this.mockWeather_)
             .`when`(this.mockWeatherList)[0]
 
         // When
         this.checkWeatherObject
-            .getTemperatureIconUrl( this.mockWeather )
+            .getTemperatureIconUrl(this.mockWeather)
             .subscribe(testObserver)
 
         // Then
         testObserver
             .assertNotComplete()
-            .assertError( IllegalArgumentException::class.java )
+            .assertError(IllegalArgumentException::class.java)
 
     }
 
@@ -109,30 +109,30 @@ class CheckWeatherObjectTest {
     fun getTemperatureIconUrl_ShouldReturnIconFullUrl_IfConditionsAreSuitable() {
 
         // Given
-        val testObserver : TestObserver<String> = TestObserver()
+        val testObserver: TestObserver<String> = TestObserver()
 
         Mockito
-            .doReturn( 1 )
+            .doReturn(1)
             .`when`(this.mockWeatherList)
             .size
 
         Mockito
-            .doReturn( "01d" )
+            .doReturn("01d")
             .`when`(this.mockWeather_)
             .icon
 
         Mockito
-            .doReturn( this.mockWeather_ )
+            .doReturn(this.mockWeather_)
             .`when`(this.mockWeatherList)[0]
 
         Mockito
             .doReturn("uri_Contains_01d")
-            .`when`( this.mockIconUtil )
+            .`when`(this.mockIconUtil)
             .getIconFullUrl(Mockito.anyString())
 
         // When
         this.checkWeatherObject
-            .getTemperatureIconUrl( this.mockWeather )
+            .getTemperatureIconUrl(this.mockWeather)
             .subscribe(testObserver)
 
         // Then
@@ -142,7 +142,7 @@ class CheckWeatherObjectTest {
             .assertValue { it -> it.contains("01d") }
 
         Mockito
-            .verify( this.mockIconUtil )
+            .verify(this.mockIconUtil)
             .getIconFullUrl(Mockito.anyString())
 
     }
@@ -151,7 +151,7 @@ class CheckWeatherObjectTest {
     fun getCurrentTemperatureText_ShoudReturnError_IfTheMainObjectIsNull() {
 
         // Given
-        val testObserver : TestObserver<String> = TestObserver()
+        val testObserver: TestObserver<String> = TestObserver()
 
         Mockito
             .doReturn(null)
@@ -160,13 +160,13 @@ class CheckWeatherObjectTest {
 
         // When
         this.checkWeatherObject
-            .getCurrentTemperatureText( this.mockWeather )
+            .getCurrentTemperatureText(this.mockWeather)
             .subscribe(testObserver)
 
         // Then
         testObserver
             .assertNotComplete()
-            .assertError( IllegalArgumentException::class.java )
+            .assertError(IllegalArgumentException::class.java)
 
     }
 
@@ -174,7 +174,7 @@ class CheckWeatherObjectTest {
     fun getCurrentTemperatureText_ShoudldReturnStyledTemperature_IfConditionsProvided() {
 
         // Given
-        val testObserver : TestObserver<String> = TestObserver()
+        val testObserver: TestObserver<String> = TestObserver()
 
         Mockito
             .doReturn(this.mockMain)
@@ -193,7 +193,7 @@ class CheckWeatherObjectTest {
 
         // When
         this.checkWeatherObject
-            .getCurrentTemperatureText( this.mockWeather )
+            .getCurrentTemperatureText(this.mockWeather)
             .subscribe(testObserver)
 
         // Then
@@ -202,7 +202,49 @@ class CheckWeatherObjectTest {
             .assertValue("10C")
 
         Mockito
-            .verify( this.mockTemperatureUtil )
-            .getStyledTemperature( Mockito.anyDouble() )
+            .verify(this.mockTemperatureUtil)
+            .getStyledTemperature(10.0)
+    }
+
+    @Test
+    fun getMinMaxTemperatureText_ShouldReturnedStyledMinMaxTemperature_IfConditionsProvided() {
+
+        // Given
+        val testObserver: TestObserver<String> = TestObserver()
+
+        Mockito
+            .doReturn(this.mockMain)
+            .`when`(this.mockWeather)
+            .main
+
+        Mockito
+            .doReturn(9.0)
+            .`when`(this.mockMain)
+            .tempMin
+
+        Mockito
+            .doReturn(11.0)
+            .`when`(this.mockMain)
+            .tempMax
+
+        Mockito
+            .doReturn("9C/11C")
+            .`when`(this.mockTemperatureUtil)
+            .getStyledMinMaxTemperature(Mockito.anyDouble(), Mockito.anyDouble())
+
+        // When
+        this.checkWeatherObject
+            .getMinMaxTemperatureText(this.mockWeather)
+            .subscribe(testObserver)
+
+        // Then
+        testObserver
+            .assertComplete()
+            .assertValue("9C/11C")
+
+        Mockito
+            .verify(this.mockTemperatureUtil)
+            .getStyledMinMaxTemperature(9.0, 11.0)
+
     }
 }

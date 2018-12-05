@@ -49,6 +49,23 @@ interface IWeatherDetailContract {
 
         fun mainTemperature()
 
+        fun minMaxTemperature()
+
+        fun location()
+
+        fun requestTime()
+
+        fun windSpeed()
+
+        fun windDegree()
+
+        fun humidity()
+
+        fun sunrise()
+
+        fun sunset()
+
+        fun visibility()
     }
 
 }

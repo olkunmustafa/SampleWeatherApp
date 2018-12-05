@@ -19,4 +19,11 @@ interface ICheckWeatherUtil {
      */
     fun getCurrentTemperatureText(weather: Weather): Observable<String>
 
+    /**
+     * @since 0.2
+     * @author Mustafa Olkun
+     * @return [IllegalArgumentException] or Suitable [String] to show the min and max.
+     */
+    fun getMinMaxTemperatureText(weather: Weather) : Observable<String>
+
 }

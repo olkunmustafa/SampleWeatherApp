@@ -2,7 +2,9 @@ package com.olkunmustafa.sampleweatherapp.weatherdetail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
+import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
 import com.olkunmustafa.sampleweatherapp.data.util.iconutil.IIconUtil
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
 import com.olkunmustafa.sampleweatherapp.model.Weather
@@ -20,6 +22,7 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
     private lateinit var view: IWeatherDetailContract.View
     private var dis1: Disposable? = null
     lateinit var weather: Weather
+    lateinit var weatherRequest: WeatherRequest
 
     @Inject
     lateinit var argumentUtil: ArgumentUtil
@@ -32,6 +35,9 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
 
     @Inject
     lateinit var iCheckWeatherUtil: ICheckWeatherUtil
+
+    @Inject
+    lateinit var iDateUtil: IDateUtil
 
     override fun setView(view: IWeatherDetailContract.View) {
         this.view = view
@@ -46,6 +52,7 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
                 this.argumentUtil.checkArgRecordContains(bundle)
                     .flatMap { recordID ->
                         this.iweatherUtil.getWeather(recordID)
+                            .doOnNext { weatherRequest = it }
                     }
                     .flatMap {
                         this.iCreateWeatherModel.convertWeatherModel(it.weatherdata)
@@ -141,6 +148,8 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
     }
 
     override fun requestTime() {
+        val requestTime = this.iDateUtil.formatDate(this.weatherRequest.requestTime)
+        this.view.setRequestTime(requestTime)
     }
 
     override fun windSpeed() {

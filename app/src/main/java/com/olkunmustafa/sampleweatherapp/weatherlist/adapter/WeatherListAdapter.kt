@@ -48,7 +48,7 @@ open class WeatherListAdapter(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { weather ->
-                holder.requestTime.text = iDateUtil.formatDate(weatherRequest.requestTime!!)
+                holder.requestTime.text = iDateUtil.formatDate(weatherRequest.requestTime)
                 holder.currentTemperature.text = iTemperatureUtil.getStyledTemperature( weather.main.temp )
                 holder.currentMinMax.text = iTemperatureUtil.getStyledMinMaxTemperature( weather.main.tempMin, weather.main.tempMax )
                 holder.location.text = weather.name

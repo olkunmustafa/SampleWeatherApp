@@ -113,7 +113,7 @@ class FakeList : IWeatherUtil {
 
    override fun getWeather(id: Int): Observable<WeatherRequest> {
       val weatherRequest : WeatherRequest = WeatherRequest()
-      weatherRequest.requestTime = Date(Calendar.getInstance().timeInMillis)
+      weatherRequest.requestTime = Date(Calendar.getInstance().timeInMillis )
       weatherRequest.weatherdata = test
       weatherRequest.uid = 1
 

@@ -11,6 +11,6 @@ interface IDateUtil {
      * @since 0.1
      * @author Mustafa Olkun
      */
-    fun formatDate(date: Date): String
+    fun formatDate(date: Date?): String
 
 }

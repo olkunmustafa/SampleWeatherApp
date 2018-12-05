@@ -1,5 +1,6 @@
 package com.olkunmustafa.sampleweatherapp.weatherlist
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.LinearLayoutManager
@@ -13,9 +14,10 @@ import com.olkunmustafa.sampleweatherapp.AppModule
 import com.olkunmustafa.sampleweatherapp.BaseFragment
 import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.weatherlist.adapter.WeatherListAdapter
+import com.olkunmustafa.sampleweatherapp.weathermain.listener.IFragmentListener
 import javax.inject.Inject
 
-class WeatherFragment : BaseFragment(), IWeatherListContract.View {
+class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
 
     @Inject
     lateinit var presenter: WeatherListPresenter
@@ -30,9 +32,9 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
 
     companion object {
 
-        fun newInstance(): WeatherFragment {
+        fun newInstance(): WeatherListFragment {
             val args = Bundle()
-            val fragment = WeatherFragment()
+            val fragment = WeatherListFragment()
 
             fragment.arguments = args
             return fragment
@@ -40,19 +42,24 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
         DaggerWeatherListComponent.builder()
             .appModule(AppModule(activity!!))
             .build()
             .inject(this)
 
+        presenter.attached(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
         this.presenter.setView(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView: View = inflater.inflate(R.layout.fragment_weather, container, false)
+        val rootView: View = inflater.inflate(R.layout.fragment_weather_list, container, false)
 
         ButterKnife.bind(this, rootView)
 

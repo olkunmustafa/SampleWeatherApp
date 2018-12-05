@@ -16,4 +16,14 @@
         <item name="android:layout_marginBottom">@dimen/cardview_item_wrapper_ptb</item>
     </style>
 
+    <style name="DetailItemViewStyle">
+        <item name="android:layout_width">@dimen/detail_item_view_w</item>
+        <item name="android:layout_marginRight">@dimen/detail_wrapper_item_mrl</item>
+        <item name="android:layout_marginLeft">@dimen/detail_wrapper_item_mrl</item>
+        <item name="android:layout_marginEnd">@dimen/detail_wrapper_item_mrl</item>
+        <item name="android:layout_marginStart">@dimen/detail_wrapper_item_mrl</item>
+        <item name="android:layout_marginTop">@dimen/detail_wrapper_item_mrl</item>
+        <item name="android:layout_marginBottom">@dimen/detail_wrapper_item_mrl</item>
+    </style>
+
 </resources>

@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:id="@+id/main_card_wrapper">
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:background="@color/white">
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/cardview_list_item_plr"
             android:paddingStart="@dimen/cardview_list_item_plr"
             android:paddingRight="@dimen/cardview_list_item_plr"
             android:paddingEnd="@dimen/cardview_list_item_plr"
             android:paddingTop="@dimen/cardview_list_item_ptb"
-            android:paddingBottom="@dimen/cardview_list_item_ptb">
+            android:paddingBottom="@dimen/cardview_list_item_ptb"
+    >
 
         <LinearLayout
                 android:layout_width="0dp"
@@ -26,17 +24,24 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
+            <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="@dimen/icon_detail_wh"
+                    android:layout_height="@dimen/icon_detail_wh"
+                    android:id="@+id/temperature_icon"
+                    android:layout_gravity="center_horizontal"
+            />
+
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:gravity="center_horizontal"
             >
 
                 <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/current_temperature"
-                        android:text="16°C"
                         android:textSize="42sp"
                         android:layout_marginRight="7dp"
                         android:layout_marginEnd="7dp"
@@ -47,7 +52,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/current_min_max"
-                        android:text="16°/19°"
                         android:layout_gravity="center"
                         android:layout_marginBottom="5dp"
                         android:textSize="20sp"
@@ -60,7 +64,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/location"
-                    android:text="İstanbul"
                     android:textSize="22sp"
                     android:textColor="@color/sharpie"
             />
@@ -69,7 +72,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/request_time"
-                    android:text="3 December 2018"
                     android:textColor="@color/gravel"
             />
 
@@ -77,19 +79,52 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/description"
-                    android:text="Broken Clouds"
                     android:textColor="@color/sharpie"
             />
 
         </LinearLayout>
 
-        <android.support.v7.widget.AppCompatImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:id="@+id/temperature_icon"
-                android:src="@drawable/sample_icon"
-        />
-
     </LinearLayout>
 
-</android.support.v7.widget.CardView>
+    <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="@integer/weather_detail_row_count"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/detail_wrapper_mt"
+    >
+
+        <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                android:id="@+id/wind_speed"
+                app:detail_title="@string/wind_speed"
+                style="@style/DetailItemViewStyle"
+        />
+        <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                android:id="@+id/wind_degree"
+                app:detail_title="@string/wind_degree"
+                style="@style/DetailItemViewStyle"
+        />
+        <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                android:id="@+id/humidity"
+                app:detail_title="@string/humidity"
+                style="@style/DetailItemViewStyle"
+        />
+        <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                android:id="@+id/sunrise"
+                app:detail_title="@string/sunrise"
+                style="@style/DetailItemViewStyle"
+        />
+        <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                android:id="@+id/sunset"
+                app:detail_title="@string/sunset"
+                style="@style/DetailItemViewStyle"
+        />
+        <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                android:id="@+id/visibility"
+                app:detail_title="@string/visibility"
+                style="@style/DetailItemViewStyle"
+        />
+
+    </GridLayout>
+
+</LinearLayout>

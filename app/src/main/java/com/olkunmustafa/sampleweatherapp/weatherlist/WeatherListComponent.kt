@@ -8,6 +8,6 @@ import javax.inject.Singleton
 @Component(modules = [AppModule::class, WeatherListModule::class])
  interface WeatherListComponent {
 
-    fun inject(fragment: WeatherFragment): Unit
+    fun inject(fragment: WeatherListFragment): Unit
 
 }

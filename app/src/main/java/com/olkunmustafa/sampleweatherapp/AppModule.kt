@@ -6,8 +6,12 @@ import com.google.gson.GsonBuilder
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherDatabase
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.FormatDate
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
+import com.olkunmustafa.sampleweatherapp.data.util.iconutil.IIconUtil
+import com.olkunmustafa.sampleweatherapp.data.util.iconutil.OpenWeatherMapIconUtil
 import com.olkunmustafa.sampleweatherapp.data.util.temperatureutil.FormattedTemperature
 import com.olkunmustafa.sampleweatherapp.data.util.temperatureutil.ITemperatureUtil
+import com.olkunmustafa.sampleweatherapp.weatherdetail.util.checkweatherutil.CheckWeatherObject
+import com.olkunmustafa.sampleweatherapp.weatherdetail.util.checkweatherutil.ICheckWeatherUtil
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -40,8 +44,16 @@ class AppModule(var mContext: Context) {
     }
 
     @Provides
-    fun provideITemperatureUtil() : ITemperatureUtil {
+    fun provideITemperatureUtil(): ITemperatureUtil {
         return FormattedTemperature()
+    }
+
+    @Provides
+    fun provideICheckWeatherUtil(
+        iconUtil: IIconUtil,
+        iTemperatureUtil: ITemperatureUtil
+    ): ICheckWeatherUtil {
+        return CheckWeatherObject(iconUtil, iTemperatureUtil)
     }
 
 }

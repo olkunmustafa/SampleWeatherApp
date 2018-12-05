@@ -3,6 +3,7 @@ package com.olkunmustafa.sampleweatherapp.weathermain
 import android.app.Activity
 import com.olkunmustafa.sampleweatherapp.permissions.location.AccessLocation
 import com.olkunmustafa.sampleweatherapp.permissions.location.IAccessLocationUtil
+import com.olkunmustafa.sampleweatherapp.util.location.KLocationSettingsHelper
 import com.olkunmustafa.sampleweatherapp.util.location.LocationServiceUtil
 import dagger.Module
 import dagger.Provides
@@ -20,4 +21,8 @@ class WeatherModule(private var activity: Activity) {
         return LocationServiceUtil(this.activity)
     }
 
+    @Provides
+    fun provideKLocationSettingsHelper() : KLocationSettingsHelper {
+        return KLocationSettingsHelper(this.activity)
+    }
 }

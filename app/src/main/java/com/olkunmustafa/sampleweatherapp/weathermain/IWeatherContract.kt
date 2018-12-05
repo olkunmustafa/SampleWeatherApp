@@ -18,7 +18,7 @@ interface IWeatherContract {
 
         fun saveButtonClicked()
 
-        fun searchDeviceLocation()
+        fun locationRequest()
 
         fun activityResult( requestCode: Int, resultCode: Int, data: Intent? )
     }

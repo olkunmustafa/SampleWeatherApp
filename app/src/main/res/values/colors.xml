@@ -8,4 +8,6 @@
     <color name="sharpie">#1A1C19</color>
     <color name="gravel">#5E5E5E</color>
     <color name="sandy_sand">#EEEEE6</color>
+
+    <color name="white">#fff</color>
 </resources>

@@ -3,6 +3,7 @@ package com.olkunmustafa.sampleweatherapp
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.olkunmustafa.sampleweatherapp.data.apiclient.ApiClient
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherDatabase
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.FormatDate
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
@@ -54,7 +55,13 @@ class AppModule(private var mContext: Context) {
         iTemperatureUtil: ITemperatureUtil
     ): ICheckWeatherUtil {
         return CheckWeatherObject(
-            iconUtil, iTemperatureUtil)
+            iconUtil, iTemperatureUtil
+        )
+    }
+
+    @Provides
+    fun provideApiClient(): ApiClient {
+        return ApiClient()
     }
 
 }

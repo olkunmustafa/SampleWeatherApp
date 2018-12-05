@@ -55,15 +55,13 @@ interface IWeatherDetailContract {
 
         fun requestTime()
 
-        fun windSpeed()
+        fun description()
 
-        fun windDegree()
+        fun wind()
 
         fun humidity()
 
-        fun sunrise()
-
-        fun sunset()
+        fun sunTimes()
 
         fun visibility()
     }

@@ -53,7 +53,8 @@ class AppModule(private var mContext: Context) {
         iconUtil: IIconUtil,
         iTemperatureUtil: ITemperatureUtil
     ): ICheckWeatherUtil {
-        return CheckWeatherObject(iconUtil, iTemperatureUtil)
+        return CheckWeatherObject(
+            iconUtil, iTemperatureUtil)
     }
 
 }

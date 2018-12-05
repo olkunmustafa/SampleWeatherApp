@@ -16,7 +16,7 @@ class FakeList : IWeatherUtil {
             "        {\n" +
             "            \"id\": 803,\n" +
             "            \"main\": \"Clouds\",\n" +
-            "            \"description\": \"broken clouds\",\n" +
+            "            \"description\": \"broken cloudssss\",\n" +
             "            \"icon\": \"04d\"\n" +
             "        }\n" +
             "    ],\n" +
@@ -42,7 +42,7 @@ class FakeList : IWeatherUtil {
             "        \"id\": 6970,\n" +
             "        \"message\": 0.1832,\n" +
             "        \"country\": \"TR\",\n" +
-            "        \"sunrise\": 1543813907,\n" +
+            "        \"sunTimes\": 1543813907,\n" +
             "        \"sunset\": 1543847769\n" +
             "    },\n" +
             "    \"id\": 745044,\n" +

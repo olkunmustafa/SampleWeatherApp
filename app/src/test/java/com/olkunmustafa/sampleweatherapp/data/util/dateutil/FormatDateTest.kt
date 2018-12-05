@@ -32,4 +32,21 @@ class FormatDateTest {
             .isEqualTo(expected)
 
     }
+
+    @Test
+    fun formatTimeFromSecond_ShouldReturnTheRequestTime() {
+
+        // Given
+        val givenTimeStamp = 1544001600L
+        val expected = "12:20"
+
+        // When
+        val actual = this.iDateUtil.formatTimeFromSecond(givenTimeStamp)
+
+        // Then
+        Assertions
+            .assertThat( actual )
+            .isEqualTo(expected)
+
+    }
 }

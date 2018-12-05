@@ -5,16 +5,13 @@ import android.os.Bundle
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
-import com.olkunmustafa.sampleweatherapp.data.util.iconutil.IIconUtil
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
 import com.olkunmustafa.sampleweatherapp.model.Weather
 import com.olkunmustafa.sampleweatherapp.weatherdetail.util.ArgumentUtil
 import com.olkunmustafa.sampleweatherapp.weatherdetail.util.checkweatherutil.ICheckWeatherUtil
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Presenter {
@@ -79,11 +76,10 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
         this.minMaxTemperature()
         this.location()
         this.requestTime()
-        this.windSpeed()
-        this.windDegree()
+        this.description()
+        this.wind()
         this.humidity()
-        this.sunrise()
-        this.sunset()
+        this.sunTimes()
         this.visibility()
     }
 
@@ -152,21 +148,83 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
         this.view.setRequestTime(requestTime)
     }
 
-    override fun windSpeed() {
+    @SuppressLint("CheckResult")
+    override fun description() {
+        this.iCheckWeatherUtil
+            .getDesciption(weather)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    view.setDescription(it)
+                },
+                { error ->
+                    error.printStackTrace()
+                    // TODO show an error message if we cannot show Description!
+                    // TODO Send event to developers!
+                }
+            )
     }
 
-    override fun windDegree() {
+    @SuppressLint("CheckResult")
+    override fun wind() {
+        this.iCheckWeatherUtil.getWindModel(this.weather)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    view.setWindSpeed(it.speed.toString())
+                    view.setWindDegree(it.deg.toString())
+                },
+                { error ->
+                    error.printStackTrace()
+                    // TODO show an error message if we cannot show wind!
+                    // TODO Send event to developers!
+                }
+            )
     }
 
+    @SuppressLint("CheckResult")
     override fun humidity() {
+        this.iCheckWeatherUtil.getHumidityValue(this.weather)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    view.setHumidity(it)
+                },
+                { error ->
+                    error.printStackTrace()
+                    // TODO show an error message if we cannot show Humidity!
+                    // TODO Send event to developers!
+                }
+            )
     }
 
-    override fun sunrise() {
-    }
+    @SuppressLint("CheckResult")
+    override fun sunTimes() {
+        this.iCheckWeatherUtil
+            .getSunTimes(this.weather)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    val sunrise = this.iDateUtil.formatTimeFromSecond(it.sunrise)
+                    val sunset = this.iDateUtil.formatTimeFromSecond(it.sunset)
 
-    override fun sunset() {
+                    view.setSunrise(sunrise)
+                    view.setSunset(sunset)
+                },
+                { error ->
+                    error.printStackTrace()
+                    // TODO show an error message if we cannot show Sunrise or Sunset!
+                    // TODO Send event to developers!
+                }
+            )
+
     }
 
     override fun visibility() {
+        view.setVisibility(weather.visibility.toString())
     }
 }

@@ -1,8 +1,10 @@
 package com.olkunmustafa.sampleweatherapp.weatherdetail.util.checkweatherutil
 
+import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
 import com.olkunmustafa.sampleweatherapp.data.util.iconutil.IIconUtil
 import com.olkunmustafa.sampleweatherapp.data.util.temperatureutil.ITemperatureUtil
 import com.olkunmustafa.sampleweatherapp.model.Main
+import com.olkunmustafa.sampleweatherapp.model.Sys
 import com.olkunmustafa.sampleweatherapp.model.Weather
 import com.olkunmustafa.sampleweatherapp.model.Weather_
 import io.reactivex.observers.TestObserver
@@ -33,6 +35,12 @@ class CheckWeatherObjectTest {
 
     @Mock
     lateinit var mockMain: Main
+
+    @Mock
+    lateinit var mockIDateUtil: IDateUtil
+
+    @Mock
+    lateinit var mockSys : Sys
 
     @Before
     fun setUp() {
@@ -245,6 +253,71 @@ class CheckWeatherObjectTest {
         Mockito
             .verify(this.mockTemperatureUtil)
             .getStyledMinMaxTemperature(9.0, 11.0)
+
+    }
+
+    @Test
+    fun getSunTimes_ShouldArgumentException_IfSunValuesAreSmallerOrEqualsToZero() {
+
+        // Given
+        val testObserver: TestObserver<Sys> = TestObserver()
+
+        Mockito
+            .doReturn(0L)
+            .`when`(this.mockSys)
+            .sunrise
+
+        Mockito
+            .doReturn(this.mockSys)
+            .`when`(this.mockWeather)
+            .sys
+
+        // When
+        this.checkWeatherObject
+            .getSunTimes( this.mockWeather )
+            .subscribe(testObserver)
+
+        // Then
+        testObserver
+            .assertNotComplete()
+            .assertError( IllegalArgumentException::class.java )
+            .assertErrorMessage("Sunrise and Sunset time can not be smaller/equals to zero")
+    }
+
+    @Test
+    fun getSunTimes_ShouldReturnStyledvalue_IfConditionsAreProvided() {
+
+        // Given
+        val testObserver: TestObserver<Sys> = TestObserver()
+
+        Mockito
+            .doReturn(1543986828L)
+            .`when`(this.mockSys)
+            .sunrise
+
+        Mockito
+            .doReturn(1544020551L)
+            .`when`(this.mockSys)
+            .sunset
+
+        Mockito
+            .doReturn(this.mockSys)
+            .`when`(this.mockWeather)
+            .sys
+
+        Mockito
+            .doReturn("")
+            .`when`(this.mockIDateUtil)
+            .formatTimeFromSecond(Mockito.anyLong())
+
+        // When
+        this.checkWeatherObject
+            .getSunTimes( this.mockWeather )
+            .subscribe(testObserver)
+
+        // Then
+        testObserver
+            .assertComplete()
 
     }
 }

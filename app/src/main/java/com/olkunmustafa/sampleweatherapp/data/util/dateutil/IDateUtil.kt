@@ -13,4 +13,12 @@ interface IDateUtil {
      */
     fun formatDate(date: Date?): String
 
+    /**
+     * Converts to HH:mm time type the given long value.
+     *
+     * @since 0.2
+     * @author Mustafa Olkun
+     */
+    fun formatTimeFromSecond(time: Long): String
+
 }

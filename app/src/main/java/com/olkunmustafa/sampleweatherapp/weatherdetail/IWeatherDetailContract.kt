@@ -1,6 +1,7 @@
 package com.olkunmustafa.sampleweatherapp.weatherdetail
 
 import android.os.Bundle
+import com.olkunmustafa.sampleweatherapp.model.Weather
 import io.reactivex.Observable
 
 interface IWeatherDetailContract {
@@ -39,6 +40,14 @@ interface IWeatherDetailContract {
         fun setView(view: View)
 
         fun created(args: Bundle?)
+
+        fun destroyed()
+
+        fun weatherRequestOnNext( weather : Weather )
+
+        fun temperatureIcon()
+
+        fun mainTemperature()
 
     }
 

@@ -7,7 +7,7 @@ import android.arch.persistence.room.Query
 @Dao
 interface WeatherRequestDao {
 
-    @Query("SELECT * FROM weatherrequest")
+    @Query("SELECT * FROM weatherrequest order by id DESC")
     fun getAll(): List<WeatherRequest>
 
     @Insert

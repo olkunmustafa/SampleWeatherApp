@@ -3,18 +3,16 @@ package com.olkunmustafa.sampleweatherapp.weathermain
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.location.Location
 import com.olkunmustafa.sampleweatherapp.data.apiclient.ApiClient
 import com.olkunmustafa.sampleweatherapp.data.services.IGetCurrentWeatherMap
+import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
+import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
 import com.olkunmustafa.sampleweatherapp.permissions.location.AccessLocation
 import com.olkunmustafa.sampleweatherapp.permissions.location.IAccessLocationUtil
-import com.olkunmustafa.sampleweatherapp.util.Optional
-import com.olkunmustafa.sampleweatherapp.util.location.IKLocationSettingsResult
 import com.olkunmustafa.sampleweatherapp.util.location.KLocationSettingsHelper
-import com.olkunmustafa.sampleweatherapp.util.location.LocationServiceUtil
-import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+import org.greenrobot.eventbus.EventBus
 
 class WeatherPresenter @Inject constructor() : IWeatherContract.Presenter {
 
@@ -28,10 +26,13 @@ class WeatherPresenter @Inject constructor() : IWeatherContract.Presenter {
     lateinit var iAccessLocationUtil: IAccessLocationUtil
 
     @Inject
-    lateinit var locationServiceUtil: LocationServiceUtil
+    lateinit var kLocationSettingsHelper: KLocationSettingsHelper
 
     @Inject
-    lateinit var kLocationSettingsHelper: KLocationSettingsHelper
+    lateinit var iWeatherUtil: IWeatherUtil
+
+    @Inject
+    lateinit var iCreateWeatherModel: ICreateWeatherModel
 
     override fun setView(view: IWeatherContract.View) {
         this.view = view
@@ -41,32 +42,37 @@ class WeatherPresenter @Inject constructor() : IWeatherContract.Presenter {
         this.view.replaceFragment()
     }
 
-    @SuppressLint("CheckResult")
     override fun saveButtonClicked() {
         this.locationRequest()
-//        val iGetCurrentWeatherMap =ApiClient.createService(IGetCurrentWeatherMap::class.java)
-//        iGetCurrentWeatherMap
-//            .getCurrentWeather(41.00, 29.00, "d0fcc375ac746c5d71388a395a4e3539")
-//            .subscribeOn(Schedulers.io())
-//            .subscribe { it -> println( "TEST_BASE" + it.main.temp )}
-
 
     }
 
+    @SuppressLint("CheckResult")
     override fun locationRequest() {
         if (this.iAccessLocationUtil.hasAccessFineLocationPermission()) {
 
-//            this.kLocationSettingsHelper
-//                .createDefaultLocationRequest()
-//                .flatMap { loc ->
-//                    val iGetCurrentWeatherMap = ApiClient.createService(IGetCurrentWeatherMap::class.java)
-//                    iGetCurrentWeatherMap
-//                        .getCurrentWeather(loc.latitude, loc.longitude, "d0fcc375ac746c5d71388a395a4e3539")
-//                        .subscribeOn(Schedulers.io())
-//                        .map { it -> println( "TEST_BASE" + it.main.temp )}
-//
-//                }
-//                .subscribe()
+            this.kLocationSettingsHelper
+                .createDefaultLocationRequest()
+                .toObservable()
+                .flatMap { loc ->
+                    val iGetCurrentWeatherMap = apiClient.createService(IGetCurrentWeatherMap::class.java)
+
+                    iGetCurrentWeatherMap
+                        .getCurrentWeather(loc.latitude, loc.longitude, appid)
+                        .subscribeOn(Schedulers.io())
+                }
+                .flatMap {
+                    iCreateWeatherModel.createWeatherRequestModel(it)
+                }
+                .subscribe(
+                    {
+                        this.iWeatherUtil.saveWeatherRequest(it)
+                        EventBus.getDefault().post(it)
+
+                    }, {
+                        it.printStackTrace()
+                    }
+                )
 
         } else {
             this.iAccessLocationUtil.getAccessFineLocationPermission()

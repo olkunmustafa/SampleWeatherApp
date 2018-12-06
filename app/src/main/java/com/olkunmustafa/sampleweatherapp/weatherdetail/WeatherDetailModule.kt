@@ -21,12 +21,6 @@ class WeatherDetailModule {
     }
 
     @Provides
-    fun provideIWeatherListUtil(weatherDatabase: WeatherDatabase): IWeatherUtil {
-//        return WeatherListFromLocalDB(weatherDatabase)
-        return FakeList()
-    }
-
-    @Provides
     fun provideIIconUtil(): IIconUtil {
         return OpenWeatherMapIconUtil()
     }

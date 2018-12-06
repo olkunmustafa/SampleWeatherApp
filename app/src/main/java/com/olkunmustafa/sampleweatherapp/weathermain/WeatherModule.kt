@@ -1,6 +1,9 @@
 package com.olkunmustafa.sampleweatherapp.weathermain
 
 import android.app.Activity
+import com.google.gson.Gson
+import com.olkunmustafa.sampleweatherapp.data.util.createmodel.CreateWeatherModelGson
+import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
 import com.olkunmustafa.sampleweatherapp.permissions.location.AccessLocation
 import com.olkunmustafa.sampleweatherapp.permissions.location.IAccessLocationUtil
 import com.olkunmustafa.sampleweatherapp.util.location.KLocationSettingsHelper
@@ -24,5 +27,10 @@ class WeatherModule(private var activity: Activity) {
     @Provides
     fun provideKLocationSettingsHelper() : KLocationSettingsHelper {
         return KLocationSettingsHelper(this.activity)
+    }
+
+    @Provides
+    fun provideICreateWeatherModel(gson: Gson?): ICreateWeatherModel {
+        return CreateWeatherModelGson(gson)
     }
 }

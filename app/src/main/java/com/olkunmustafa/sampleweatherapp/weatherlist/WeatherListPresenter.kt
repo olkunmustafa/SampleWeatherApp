@@ -80,7 +80,7 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
         } else {
             this.weatherListAdapter.weatherRequestList.clear()
             this.weatherListAdapter.weatherRequestList.addAll(weatherList)
-            this.mView.showAdapter()
+            this.mView.showWeatherList()
             this.mView.setAdapter( this.weatherListAdapter )
         }
     }
@@ -91,7 +91,7 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(request: WeatherRequest) {
-        this.weatherListAdapter.weatherRequestList.add(request)
+        this.weatherListAdapter.weatherRequestList.add(0,request)
         this.weatherListAdapter.notifyDataSetChanged()
     }
 }

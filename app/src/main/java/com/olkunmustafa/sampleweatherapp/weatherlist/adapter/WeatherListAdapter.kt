@@ -58,6 +58,7 @@ open class WeatherListAdapter(
                 holder.currentTemperature.text = iTemperatureUtil.getStyledTemperature( weather.main.temp )
                 holder.currentMinMax.text = iTemperatureUtil.getStyledMinMaxTemperature( weather.main.tempMin, weather.main.tempMax )
                 holder.location.text = weather.name
+                holder.description.text = weather.weather[0].description
 
                 weather.weather?.get(0)?.icon?.let {
                     Picasso
@@ -100,6 +101,9 @@ open class WeatherListAdapter(
 
         @BindView(R.id.temperature_icon)
         lateinit var temperatureIcon: AppCompatImageView
+
+        @BindView(R.id.description)
+        lateinit var description : AppCompatTextView
 
         init {
             ButterKnife.bind(this, view)

@@ -3,6 +3,7 @@ package com.olkunmustafa.sampleweatherapp.data.weatherlist
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherDatabase
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequestDao
+import com.olkunmustafa.sampleweatherapp.model.Weather
 import io.reactivex.Observable
 
 class WeatherFromLocalDB(weatherDatabase: WeatherDatabase) : IWeatherUtil {
@@ -21,4 +22,7 @@ class WeatherFromLocalDB(weatherDatabase: WeatherDatabase) : IWeatherUtil {
         }
     }
 
+    override fun saveWeatherRequest(weatherRequest: WeatherRequest) {
+
+    }
 }

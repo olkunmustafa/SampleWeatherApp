@@ -1,6 +1,7 @@
 package com.olkunmustafa.sampleweatherapp.data.weatherlist
 
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
+import com.olkunmustafa.sampleweatherapp.model.Weather
 import io.reactivex.Observable
 import java.sql.Date
 import java.util.*
@@ -74,39 +75,6 @@ class FakeList : IWeatherUtil {
        fakeList.add(weatherRequest )
        fakeList.add(weatherRequest )
        fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
-       fakeList.add(weatherRequest )
 
         return Observable.just( fakeList )
     }
@@ -120,4 +88,6 @@ class FakeList : IWeatherUtil {
       return Observable.just( weatherRequest )
    }
 
+   override fun saveWeatherRequest(weatherRequest: WeatherRequest) {
+   }
 }

@@ -20,7 +20,7 @@ interface IWeatherContract {
 
         fun locationRequest()
 
-        fun activityResult( requestCode: Int, resultCode: Int, data: Intent? )
+        fun requestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray)
     }
 
 }

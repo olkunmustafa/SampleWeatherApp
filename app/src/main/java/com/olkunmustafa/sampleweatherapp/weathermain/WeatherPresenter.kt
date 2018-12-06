@@ -87,15 +87,13 @@ class WeatherPresenter @Inject constructor() : IWeatherContract.Presenter {
         }
     }
 
-    override fun activityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        if (resultCode == Activity.RESULT_OK) {
+    override fun requestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
             when (requestCode) {
+
                 AccessLocation.PERMISSION_ACCESS_FINE_LOCATION -> this.locationRequest()
 
             }
-        }
-
     }
 
 }

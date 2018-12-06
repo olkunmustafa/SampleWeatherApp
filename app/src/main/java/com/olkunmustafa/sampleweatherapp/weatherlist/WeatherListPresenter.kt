@@ -8,7 +8,10 @@ import com.olkunmustafa.sampleweatherapp.weathermain.listener.IFragmentListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
+import org.greenrobot.eventbus.ThreadMode
+import org.greenrobot.eventbus.Subscribe
 
 open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Presenter {
 
@@ -51,6 +54,14 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
             }
     }
 
+    override fun started() {
+        EventBus.getDefault().register(this)
+    }
+
+    override fun stopped() {
+        EventBus.getDefault().unregister(this)
+    }
+
     override fun destroyed() {
         if (!dis1.isDisposed) {
             this.dis1.dispose()
@@ -75,5 +86,9 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
 
     override fun getWeatherListOnError(throwable: Throwable) {
         throwable.printStackTrace()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: WeatherRequest) {
     }
 }

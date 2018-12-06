@@ -30,6 +30,10 @@ interface IWeatherListContract {
 
         fun created()
 
+        fun started()
+
+        fun stopped()
+
         fun destroyed()
 
         fun getWeatherListOnNext(weatherList: List<WeatherRequest>)

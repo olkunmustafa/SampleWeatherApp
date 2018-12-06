@@ -68,6 +68,16 @@ class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
         return rootView
     }
 
+    override fun onStart() {
+        super.onStart()
+        presenter.started()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.stopped()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
 

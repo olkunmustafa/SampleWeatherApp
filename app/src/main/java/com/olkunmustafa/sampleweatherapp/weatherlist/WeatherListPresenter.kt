@@ -78,7 +78,8 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
         if (weatherList.isEmpty()) {
             this.mView.showEmptyListView()
         } else {
-            this.weatherListAdapter.weatherRequestList = weatherList
+            this.weatherListAdapter.weatherRequestList.clear()
+            this.weatherListAdapter.weatherRequestList.addAll(weatherList)
             this.mView.showAdapter()
             this.mView.setAdapter( this.weatherListAdapter )
         }
@@ -89,6 +90,8 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: WeatherRequest) {
+    fun onMessageEvent(request: WeatherRequest) {
+        this.weatherListAdapter.weatherRequestList.add(request)
+        this.weatherListAdapter.notifyDataSetChanged()
     }
 }

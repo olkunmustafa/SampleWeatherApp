@@ -31,9 +31,11 @@ open class WeatherListAdapter(
     private val iTemperatureUtil: ITemperatureUtil
 ) : RecyclerView.Adapter<WeatherListAdapter.CardViewHolder>() {
 
-    lateinit var weatherRequestList: List<WeatherRequest>
+    val weatherRequestList: ArrayList<WeatherRequest> = ArrayList()
+    val clickSubject = PublishSubject.create<Int>()!!
+
     private var convertWeatherModelDis: Disposable? = null
-    public val clickSubject = PublishSubject.create<Int>()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val rootView: View = LayoutInflater.from(context)

@@ -91,7 +91,12 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(request: WeatherRequest) {
+        this.mView.showWeatherList()
         this.weatherListAdapter.weatherRequestList.add(0,request)
-        this.weatherListAdapter.notifyDataSetChanged()
+        if( this.weatherListAdapter.weatherRequestList.size == 1 ){
+            this.mView.setAdapter( this.weatherListAdapter )
+        } else {
+            this.weatherListAdapter.notifyDataSetChanged()
+        }
     }
 }

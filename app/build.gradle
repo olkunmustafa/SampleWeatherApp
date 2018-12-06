@@ -65,6 +65,7 @@ dependencies {
     // Others
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
     // For tests
     testImplementation 'junit:junit:4.12'

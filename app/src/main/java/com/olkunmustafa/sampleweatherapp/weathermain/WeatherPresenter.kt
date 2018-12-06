@@ -64,13 +64,20 @@ class WeatherPresenter @Inject constructor() : IWeatherContract.Presenter {
                 .flatMap {
                     iCreateWeatherModel.createWeatherRequestModel(it)
                 }
-                .subscribe(
-                    {
-                        this.iWeatherUtil.saveWeatherRequest(it)
-                        EventBus.getDefault().post(it)
+                .flatMap { request ->
+                    this.iWeatherUtil.saveWeatherRequest(request)
+                        .map {
+                            request.uid = it.toInt()
+                            request
+                        }
 
-                    }, {
-                        it.printStackTrace()
+                }
+                .subscribe(
+                    { request ->
+                        EventBus.getDefault().post(request)
+                    },
+                    { err ->
+                        err.printStackTrace()
                     }
                 )
 

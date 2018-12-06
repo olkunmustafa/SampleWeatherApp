@@ -23,12 +23,10 @@ public class WeatherFromLocalDB(weatherDatabase: WeatherDatabase) : IWeatherUtil
         }
     }
 
-    override fun saveWeatherRequest(weatherRequest: WeatherRequest) {
-        Single.just(weatherRequest)
-            .subscribeOn(Schedulers.io())
-            .doOnSuccess {
+    override fun saveWeatherRequest(weatherRequest: WeatherRequest) : Observable<Long> {
+        return Observable.just(weatherRequest)
+            .map {
                 this.mWeatherRequestDao.insertAll(weatherRequest)
             }
-            .subscribe()
     }
 }

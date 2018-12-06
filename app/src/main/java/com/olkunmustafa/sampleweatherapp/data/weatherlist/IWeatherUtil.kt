@@ -41,5 +41,5 @@ interface IWeatherUtil {
      * @since 0.2
      * @author Mustafa Olkun
      */
-    fun saveWeatherRequest(weatherRequest: WeatherRequest)
+    fun saveWeatherRequest(weatherRequest: WeatherRequest) : Observable<Long>
 }

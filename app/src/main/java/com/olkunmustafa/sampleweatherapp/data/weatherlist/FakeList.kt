@@ -88,6 +88,7 @@ class FakeList : IWeatherUtil {
       return Observable.just( weatherRequest )
    }
 
-   override fun saveWeatherRequest(weatherRequest: WeatherRequest) {
-   }
+    override fun saveWeatherRequest(weatherRequest: WeatherRequest): Observable<Long> {
+        return Observable.just(1)
+    }
 }

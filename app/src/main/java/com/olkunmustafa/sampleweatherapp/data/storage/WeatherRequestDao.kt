@@ -11,7 +11,7 @@ interface WeatherRequestDao {
     fun getAll(): List<WeatherRequest>
 
     @Insert
-    fun insertAll(vararg users: WeatherRequest)
+    fun insertAll(request: WeatherRequest) : Long
 
     @Query("SELECT * FROM weatherrequest where id = :id")
     fun getOneByID( id : Int ): WeatherRequest

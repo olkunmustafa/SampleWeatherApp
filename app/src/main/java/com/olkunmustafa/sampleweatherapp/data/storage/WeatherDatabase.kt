@@ -20,7 +20,10 @@ abstract class WeatherDatabase : RoomDatabase() {
         fun getDatabase(context: Context): WeatherDatabase {
 
             if (INSTANCE == null) {
-                INSTANCE = Room.inMemoryDatabaseBuilder(context, WeatherDatabase::class.java)
+                INSTANCE = Room.databaseBuilder(
+                    context,
+                    WeatherDatabase::class.java,
+                    "weather-request")
                     .build()
 
             }

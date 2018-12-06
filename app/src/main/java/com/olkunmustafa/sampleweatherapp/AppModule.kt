@@ -12,6 +12,7 @@ import com.olkunmustafa.sampleweatherapp.data.util.temperatureutil.FormattedTemp
 import com.olkunmustafa.sampleweatherapp.data.util.temperatureutil.ITemperatureUtil
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.FakeList
 import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
+import com.olkunmustafa.sampleweatherapp.data.weatherlist.WeatherFromLocalDB
 import com.olkunmustafa.sampleweatherapp.weatherdetail.util.checkweatherutil.CheckWeatherObject
 import com.olkunmustafa.sampleweatherapp.weatherdetail.util.checkweatherutil.ICheckWeatherUtil
 import dagger.Module
@@ -65,10 +66,11 @@ class AppModule(private var mContext: Context) {
         return ApiClient()
     }
 
+    @Singleton
     @Provides
-    fun provideIWeatherListUtil(): IWeatherUtil {
-//        return WeatherListFromLocalDB(weatherDatabase)
-        return FakeList()
+    fun provideIWeatherListUtil( weatherDatabase : WeatherDatabase ): IWeatherUtil {
+        return WeatherFromLocalDB(weatherDatabase)
+//        return FakeList()
     }
 
 }

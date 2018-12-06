@@ -3,10 +3,11 @@ package com.olkunmustafa.sampleweatherapp.data.weatherlist
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherDatabase
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequestDao
-import com.olkunmustafa.sampleweatherapp.model.Weather
 import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 
-class WeatherFromLocalDB(weatherDatabase: WeatherDatabase) : IWeatherUtil {
+public class WeatherFromLocalDB(weatherDatabase: WeatherDatabase) : IWeatherUtil {
 
     private var mWeatherRequestDao: WeatherRequestDao = weatherDatabase.weatherModel()
 
@@ -23,6 +24,11 @@ class WeatherFromLocalDB(weatherDatabase: WeatherDatabase) : IWeatherUtil {
     }
 
     override fun saveWeatherRequest(weatherRequest: WeatherRequest) {
-
+        Single.just(weatherRequest)
+            .subscribeOn(Schedulers.io())
+            .doOnSuccess {
+                this.mWeatherRequestDao.insertAll(weatherRequest)
+            }
+            .subscribe()
     }
 }

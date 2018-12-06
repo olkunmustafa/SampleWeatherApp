@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface IGetCurrentWeatherMap {
 
-    @GET("weather")
+    @GET("weather?units=metric")
     fun getCurrentWeather(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,

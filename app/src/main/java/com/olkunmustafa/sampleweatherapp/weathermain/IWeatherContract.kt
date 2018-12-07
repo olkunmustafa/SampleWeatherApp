@@ -1,10 +1,12 @@
 package com.olkunmustafa.sampleweatherapp.weathermain
 
+import android.content.Intent
+
 interface IWeatherContract {
 
     interface View {
 
-        fun replaceFragment(): Unit
+        fun replaceFragment()
 
     }
 
@@ -12,8 +14,13 @@ interface IWeatherContract {
 
         fun setView(view: View)
 
-        fun created(): Unit
+        fun created()
 
+        fun saveButtonClicked()
+
+        fun locationRequest()
+
+        fun requestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray)
     }
 
 }

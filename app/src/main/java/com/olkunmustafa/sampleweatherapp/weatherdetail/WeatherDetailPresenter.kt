@@ -56,7 +56,10 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
                     }
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { it -> weatherRequestOnNext(it) }
+            .subscribe(
+                { it -> weatherRequestOnNext(it) },
+                { err -> err.printStackTrace() }
+            )
 
     }
 

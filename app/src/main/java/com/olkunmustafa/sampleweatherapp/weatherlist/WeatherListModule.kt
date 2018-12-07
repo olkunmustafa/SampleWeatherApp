@@ -30,12 +30,6 @@ class WeatherListModule {
     }
 
     @Provides
-    fun provideIWeatherListUtil(weatherDatabase: WeatherDatabase): IWeatherUtil {
-//        return WeatherListFromLocalDB(weatherDatabase)
-        return FakeList()
-    }
-
-    @Provides
     fun provideICreateWeatherModel(gson: Gson?): ICreateWeatherModel {
         return CreateWeatherModelGson(gson)
     }

@@ -18,7 +18,7 @@ public class Sys {
     @SerializedName("country")
     @Expose
     private String country;
-    @SerializedName("sunTimes")
+    @SerializedName("sunrise")
     @Expose
     private long sunrise;
     @SerializedName("sunset")

@@ -1,7 +1,10 @@
 package com.olkunmustafa.sampleweatherapp.weathermain
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.olkunmustafa.sampleweatherapp.AppModule
 import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.weatherdetail.WeatherDetailFragment
@@ -12,7 +15,7 @@ import javax.inject.Inject
 class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentListener {
 
     @Inject
-    lateinit var presenter : WeatherPresenter
+    lateinit var presenter: WeatherPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +23,28 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
 
         DaggerWeatherComponent.builder()
             .appModule(AppModule(this))
+            .weatherModule(WeatherModule(this))
             .build()
-            .inject( this )
+            .inject(this)
 
         this.presenter.setView(this)
         this.presenter.created()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.send_new_request -> {
+                presenter.saveButtonClicked()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun replaceFragment() {
@@ -50,4 +70,10 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
 
         }
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        presenter.requestPermissionsResult( requestCode, permissions, grantResults )
+    }
+
 }

@@ -16,7 +16,7 @@ interface IWeatherListContract {
 
         fun showEmptyListView()
 
-        fun showAdapter()
+        fun showWeatherList()
 
         fun setAdapter(adapter: WeatherListAdapter)
 
@@ -29,6 +29,10 @@ interface IWeatherListContract {
         fun attached(context: Context?)
 
         fun created()
+
+        fun started()
+
+        fun stopped()
 
         fun destroyed()
 

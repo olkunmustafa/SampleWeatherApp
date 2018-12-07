@@ -14,7 +14,6 @@ import com.olkunmustafa.sampleweatherapp.AppModule
 import com.olkunmustafa.sampleweatherapp.BaseFragment
 import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.weatherlist.adapter.WeatherListAdapter
-import com.olkunmustafa.sampleweatherapp.weathermain.listener.IFragmentListener
 import javax.inject.Inject
 
 class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
@@ -68,6 +67,16 @@ class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
         return rootView
     }
 
+    override fun onStart() {
+        super.onStart()
+        presenter.started()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.stopped()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
 
@@ -92,7 +101,7 @@ class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
         }
     }
 
-    override fun showAdapter() {
+    override fun showWeatherList() {
         if (this.weatherListRequestView.visibility == View.GONE) {
             this.weatherListRequestView.visibility = View.VISIBLE
         }

@@ -3,7 +3,7 @@ ext.versions = [
         targetSdk: 28,
 
         code: 1,
-        name: "1.0",
+        name: "0.3",
 
         dagger : "2.15",
         butterknife : "8.8.1",

@@ -36,7 +36,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/current_temperature"
-                        android:text="16°C"
                         android:textSize="42sp"
                         android:layout_marginRight="7dp"
                         android:layout_marginEnd="7dp"
@@ -47,7 +46,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/current_min_max"
-                        android:text="16°/19°"
                         android:layout_gravity="center"
                         android:layout_marginBottom="5dp"
                         android:textSize="20sp"
@@ -60,7 +58,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/location"
-                    android:text="İstanbul"
                     android:textSize="22sp"
                     android:textColor="@color/sharpie"
             />
@@ -69,7 +66,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/request_time"
-                    android:text="3 December 2018"
                     android:textColor="@color/gravel"
             />
 
@@ -77,7 +73,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/description"
-                    android:text="Broken Clouds"
                     android:textColor="@color/sharpie"
             />
 

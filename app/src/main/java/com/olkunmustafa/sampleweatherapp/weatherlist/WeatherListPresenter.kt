@@ -8,7 +8,10 @@ import com.olkunmustafa.sampleweatherapp.weathermain.listener.IFragmentListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
+import org.greenrobot.eventbus.ThreadMode
+import org.greenrobot.eventbus.Subscribe
 
 open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Presenter {
 
@@ -51,6 +54,14 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
             }
     }
 
+    override fun started() {
+        EventBus.getDefault().register(this)
+    }
+
+    override fun stopped() {
+        EventBus.getDefault().unregister(this)
+    }
+
     override fun destroyed() {
         if (!dis1.isDisposed) {
             this.dis1.dispose()
@@ -67,13 +78,25 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
         if (weatherList.isEmpty()) {
             this.mView.showEmptyListView()
         } else {
-            this.weatherListAdapter.weatherRequestList = weatherList
-            this.mView.showAdapter()
+            this.weatherListAdapter.weatherRequestList.clear()
+            this.weatherListAdapter.weatherRequestList.addAll(weatherList)
+            this.mView.showWeatherList()
             this.mView.setAdapter( this.weatherListAdapter )
         }
     }
 
     override fun getWeatherListOnError(throwable: Throwable) {
         throwable.printStackTrace()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(request: WeatherRequest) {
+        this.mView.showWeatherList()
+        this.weatherListAdapter.weatherRequestList.add(0,request)
+        if( this.weatherListAdapter.weatherRequestList.size == 1 ){
+            this.mView.setAdapter( this.weatherListAdapter )
+        } else {
+            this.weatherListAdapter.notifyDataSetChanged()
+        }
     }
 }

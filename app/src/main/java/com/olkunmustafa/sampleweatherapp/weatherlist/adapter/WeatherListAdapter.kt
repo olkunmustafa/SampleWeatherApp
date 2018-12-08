@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.ButterKnife
-import butterknife.OnClick
 import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
@@ -22,6 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import android.view.animation.AnimationUtils
 
 open class WeatherListAdapter(
     private val context: Context,
@@ -33,9 +33,9 @@ open class WeatherListAdapter(
 
     val weatherRequestList: ArrayList<WeatherRequest> = ArrayList()
     val clickSubject = PublishSubject.create<Int>()!!
+    var isAddedNewItem = false
 
     private var convertWeatherModelDis: Disposable? = null
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val rootView: View = LayoutInflater.from(context)
@@ -69,6 +69,10 @@ open class WeatherListAdapter(
 
                 holder.mainCardWrapper.setOnClickListener {
                     clickSubject.onNext(weatherRequest.uid)
+                }
+
+                if( this.isAddedNewItem ){
+                    setAnimation( holder.itemView, indis )
                 }
             }
 
@@ -109,5 +113,14 @@ open class WeatherListAdapter(
             ButterKnife.bind(this, view)
         }
 
+    }
+
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position == 0) {
+            val animation = AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down)
+            viewToAnimate.startAnimation(animation)
+            isAddedNewItem = false
+        }
     }
 }

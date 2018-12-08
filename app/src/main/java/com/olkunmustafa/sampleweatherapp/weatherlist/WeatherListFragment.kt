@@ -27,6 +27,7 @@ class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
     @BindView(R.id.no_empty_view_text)
     lateinit var noEmptyViewText: AppCompatTextView
 
+
     private lateinit var viewManager: RecyclerView.LayoutManager
 
     companion object {

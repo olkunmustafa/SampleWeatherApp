@@ -96,6 +96,7 @@ open class WeatherListPresenter @Inject constructor() : IWeatherListContract.Pre
         if( this.weatherListAdapter.weatherRequestList.size == 1 ){
             this.mView.setAdapter( this.weatherListAdapter )
         } else {
+            this.weatherListAdapter.isAddedNewItem = true
             this.weatherListAdapter.notifyDataSetChanged()
         }
     }

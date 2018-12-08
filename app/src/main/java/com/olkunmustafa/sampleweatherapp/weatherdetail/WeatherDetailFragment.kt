@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.widget.LinearLayout
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.olkunmustafa.sampleweatherapp.AppModule
@@ -59,6 +61,15 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
 
     @BindView(R.id.visibility)
     lateinit var visibility: DetailItemView
+
+    @BindView(R.id.main_detail_wrapper)
+    lateinit var mainDetailWrapper: LinearLayout
+
+    @BindView(R.id.detail_wrapper_block_1)
+    lateinit var detailWrapperBlock1: LinearLayout
+
+    @BindView(R.id.detail_wrapper_block_2)
+    lateinit var detailWrapperBlock2: LinearLayout
 
     companion object {
         fun newInstance(id: Int): WeatherDetailFragment {
@@ -160,5 +171,29 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
         this.visibility.setDetailValue(visibility)
     }
 
+    override fun showAllViews(time: Long) {
+
+        this.mainDetailWrapper
+            .animate()
+            .setStartDelay(time)
+            .setDuration(time * 2)
+            .alpha(1f)
+            .start()
+
+        this.detailWrapperBlock1
+            .animate()
+            .alpha(1f)
+            .setDuration(time * 2)
+            .setStartDelay(time * 2)
+            .start()
+
+
+        this.detailWrapperBlock2
+            .animate()
+            .alpha(1f)
+            .setDuration(time * 2)
+            .setStartDelay(time * 3)
+            .start()
+    }
 
 }

@@ -34,6 +34,8 @@ interface IWeatherDetailContract {
 
         fun setVisibility( visibility : String )
 
+        fun showAllViews( time : Long )
+
     }
 
     interface Presenter {

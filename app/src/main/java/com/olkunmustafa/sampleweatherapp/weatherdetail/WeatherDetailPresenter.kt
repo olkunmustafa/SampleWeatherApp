@@ -101,6 +101,7 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
         this.humidity()
         this.sunTimes()
         this.visibility()
+        this.view.showAllViews( 300 )
     }
 
     @SuppressLint("CheckResult")

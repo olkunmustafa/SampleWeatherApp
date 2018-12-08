@@ -10,6 +10,7 @@ import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
 import com.olkunmustafa.sampleweatherapp.permissions.location.AccessLocation
 import com.olkunmustafa.sampleweatherapp.permissions.location.IAccessLocationUtil
 import com.olkunmustafa.sampleweatherapp.util.location.KLocationSettingsHelper
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import org.greenrobot.eventbus.EventBus
@@ -72,13 +73,21 @@ class WeatherPresenter @Inject constructor() : IWeatherContract.Presenter {
                         }
 
                 }
+                .observeOn( AndroidSchedulers.mainThread() )
                 .subscribe(
                     { request ->
                         EventBus.getDefault().post(request)
                     },
                     { err ->
                         err.printStackTrace()
+                    },
+                    {
+                        view.hideLoading()
+                    },
+                    {
+                        view.showLoading()
                     }
+
                 )
 
         } else {

@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ProgressBar
+import butterknife.BindView
+import butterknife.ButterKnife
 import com.olkunmustafa.sampleweatherapp.AppModule
 import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.weatherdetail.WeatherDetailFragment
@@ -17,6 +21,9 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
     @Inject
     lateinit var presenter: WeatherPresenter
 
+    @BindView(R.id.indeterminateBar)
+    lateinit var indeterminateBar : ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,6 +34,7 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
             .build()
             .inject(this)
 
+        ButterKnife.bind(this)
         this.presenter.setView(this)
         this.presenter.created()
     }
@@ -74,6 +82,16 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         presenter.requestPermissionsResult( requestCode, permissions, grantResults )
+    }
+
+    override fun showLoading() {
+        if( this.indeterminateBar.visibility == View.GONE )
+            this.indeterminateBar.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        if( this.indeterminateBar.visibility == View.VISIBLE )
+            this.indeterminateBar.visibility = View.GONE
     }
 
 }

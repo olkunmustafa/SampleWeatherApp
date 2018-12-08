@@ -12,8 +12,6 @@ interface IWeatherListContract {
 
         fun init()
 
-        fun showLoading()
-
         fun showEmptyListView()
 
         fun showWeatherList()

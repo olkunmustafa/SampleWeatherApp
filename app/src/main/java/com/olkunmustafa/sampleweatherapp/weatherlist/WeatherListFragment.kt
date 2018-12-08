@@ -88,10 +88,6 @@ class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
         viewManager = LinearLayoutManager(activity)
     }
 
-    override fun showLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun showEmptyListView() {
         if (this.noEmptyViewText.visibility == View.GONE) {
             this.noEmptyViewText.visibility = View.VISIBLE

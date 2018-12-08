@@ -6,6 +6,10 @@ interface IWeatherContract {
 
     interface View {
 
+        fun showLoading()
+
+        fun hideLoading()
+
         fun replaceFragment()
 
     }

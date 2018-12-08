@@ -1,6 +1,7 @@
 package com.olkunmustafa.sampleweatherapp.weatherdetail
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
@@ -9,6 +10,7 @@ import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
 import com.olkunmustafa.sampleweatherapp.model.Weather
 import com.olkunmustafa.sampleweatherapp.weatherdetail.util.ArgumentUtil
 import com.olkunmustafa.sampleweatherapp.weatherdetail.util.checkweatherutil.ICheckWeatherUtil
+import com.olkunmustafa.sampleweatherapp.weathermain.listener.IFragmentListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -18,6 +20,8 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
 
     private lateinit var view: IWeatherDetailContract.View
     private var dis1: Disposable? = null
+    private var iFragmentListener: IFragmentListener? = null
+
     lateinit var weather: Weather
     lateinit var weatherRequest: WeatherRequest
 
@@ -38,6 +42,12 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
 
     override fun setView(view: IWeatherDetailContract.View) {
         this.view = view
+    }
+
+    override fun attached(context: Context?) {
+        if (context is IFragmentListener) {
+            iFragmentListener = context
+        }
     }
 
     override fun created(args: Bundle?) {

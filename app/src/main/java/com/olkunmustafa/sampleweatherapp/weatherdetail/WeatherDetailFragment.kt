@@ -1,5 +1,6 @@
 package com.olkunmustafa.sampleweatherapp.weatherdetail
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
@@ -69,14 +70,20 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
 
         DaggerWeatherDetailComponent.builder()
             .appModule(AppModule(activity!!))
             .weatherDetailModule(WeatherDetailModule())
             .build()
             .inject(this)
+
+        this.presenter.attached(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         this.presenter.setView(this)
     }

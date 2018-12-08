@@ -1,5 +1,6 @@
 package com.olkunmustafa.sampleweatherapp.weatherdetail
 
+import android.content.Context
 import android.os.Bundle
 import com.olkunmustafa.sampleweatherapp.model.Weather
 import io.reactivex.Observable
@@ -36,6 +37,7 @@ interface IWeatherDetailContract {
 
     interface Presenter {
 
+        fun attached( context : Context? )
 
         fun setView(view: View)
 

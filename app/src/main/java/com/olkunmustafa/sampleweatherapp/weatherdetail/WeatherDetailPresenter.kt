@@ -3,6 +3,8 @@ package com.olkunmustafa.sampleweatherapp.weatherdetail
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.view.Menu
+import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
@@ -79,6 +81,11 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
                 it.dispose()
             }
         }
+    }
+
+    override fun preparedOptionsMenu(menu: Menu?) {
+        val item = menu?.findItem(R.id.send_new_request)
+        item?.isVisible = false
     }
 
     override fun weatherRequestOnNext(weather: Weather) {

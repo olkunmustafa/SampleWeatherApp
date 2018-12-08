@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import butterknife.BindView
@@ -84,8 +85,8 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         this.presenter.setView(this)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -102,6 +103,10 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
         super.onDestroy()
 
         this.presenter.destroyed()
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+        presenter.preparedOptionsMenu(menu)
     }
 
     override fun setTemperatureIcon(url: String) {

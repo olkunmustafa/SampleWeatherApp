@@ -52,20 +52,33 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
         }
     }
 
+    @SuppressLint("CheckResult")
     override fun created(args: Bundle?) {
-
-        this.dis1 = this.argumentUtil
+        this.argumentUtil
             .checkArgsNotNull(args)
             .subscribeOn(Schedulers.io())
             .flatMap { bundle ->
                 this.argumentUtil.checkArgRecordContains(bundle)
-                    .flatMap { recordID ->
-                        this.iweatherUtil.getWeather(recordID)
-                            .doOnNext { weatherRequest = it }
-                    }
-                    .flatMap {
-                        this.iCreateWeatherModel.convertWeatherModel(it.weatherdata)
-                    }
+            }
+            .subscribe(
+                { recordID ->
+                    createDetailInterface(recordID)
+                },
+                {
+                    it.printStackTrace()
+                }
+            )
+    }
+
+    override fun createDetailInterface(recordID: Int) {
+
+        this.dis1 = this.iweatherUtil.getWeather(recordID)
+            .subscribeOn(Schedulers.io())
+            .doOnNext {
+                weatherRequest = it
+            }
+            .flatMap {
+                this.iCreateWeatherModel.convertWeatherModel(it.weatherdata)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -101,7 +114,7 @@ class WeatherDetailPresenter @Inject constructor() : IWeatherDetailContract.Pres
         this.humidity()
         this.sunTimes()
         this.visibility()
-        this.view.showAllViews( 300 )
+        this.view.showAllViews(300)
     }
 
     @SuppressLint("CheckResult")

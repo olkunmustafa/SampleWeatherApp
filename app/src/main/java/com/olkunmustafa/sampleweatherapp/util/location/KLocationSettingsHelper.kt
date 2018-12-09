@@ -2,18 +2,11 @@ package com.olkunmustafa.sampleweatherapp.util.location
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.IntentSender
 import android.location.Location
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.LocationSettingsRequest
-import com.google.android.gms.location.LocationSettingsStatusCodes
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.*
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
+import java.lang.RuntimeException
 
 
 /**
@@ -48,6 +41,15 @@ class KLocationSettingsHelper(private var activity: Activity) {
 					}
 					emitter.onNext( locationResult.locations[0] )
 					emitter.onComplete()
+				}
+
+				override fun onLocationAvailability(availability: LocationAvailability?) {
+					super.onLocationAvailability(availability)
+					availability?.let {
+						if( !it.isLocationAvailable )
+							emitter.onError( RuntimeException() )
+					}
+
 				}
 			}
 			LocationServices.getFusedLocationProviderClient(activity)

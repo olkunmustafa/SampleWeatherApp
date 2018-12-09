@@ -52,6 +52,8 @@ interface IWeatherDetailContract {
 
         fun weatherRequestOnNext( weather : Weather )
 
+        fun createDetailInterface(recordID: Int)
+
         fun temperatureIcon()
 
         fun mainTemperature()

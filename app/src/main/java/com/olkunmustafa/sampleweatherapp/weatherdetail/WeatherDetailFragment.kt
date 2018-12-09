@@ -97,7 +97,7 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.presenter.setView(this)
-        setHasOptionsMenu(true)
+//        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -117,7 +117,7 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?) {
-        presenter.preparedOptionsMenu(menu)
+//        presenter.preparedOptionsMenu(menu)
     }
 
     override fun setTemperatureIcon(url: String) {
@@ -194,6 +194,10 @@ class WeatherDetailFragment : BaseFragment(), IWeatherDetailContract.View {
             .setDuration(time * 2)
             .setStartDelay(time * 3)
             .start()
+    }
+
+    fun updateInterface(data: Int){
+        this.presenter.createDetailInterface(data)
     }
 
 }

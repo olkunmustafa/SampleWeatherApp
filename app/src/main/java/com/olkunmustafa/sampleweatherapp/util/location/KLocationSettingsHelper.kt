@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.location.Location
 import com.google.android.gms.location.*
+import com.olkunmustafa.sampleweatherapp.weathermain.error.LocationNotFoundException
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import java.lang.RuntimeException
@@ -47,7 +48,7 @@ class KLocationSettingsHelper(private var activity: Activity) {
 					super.onLocationAvailability(availability)
 					availability?.let {
 						if( !it.isLocationAvailable )
-							emitter.onError( RuntimeException() )
+							emitter.onError( LocationNotFoundException() )
 					}
 
 				}

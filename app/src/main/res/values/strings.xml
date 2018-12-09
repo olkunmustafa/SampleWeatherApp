@@ -15,4 +15,6 @@
     <string name="humidity">Humidity</string>
     <string name="visibility">Visibility</string>
 
+    <string name="no_location_error_message">Last location can not found on device. Please be sure location is open and try again.</string>
+
 </resources>

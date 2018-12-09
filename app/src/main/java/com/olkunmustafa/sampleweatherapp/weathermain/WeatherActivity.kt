@@ -16,6 +16,10 @@ import com.olkunmustafa.sampleweatherapp.weatherdetail.WeatherDetailFragment
 import com.olkunmustafa.sampleweatherapp.weatherlist.WeatherListFragment
 import com.olkunmustafa.sampleweatherapp.weathermain.listener.IFragmentListener
 import javax.inject.Inject
+import android.content.DialogInterface
+import android.os.Build
+import android.support.v7.app.AlertDialog
+
 
 class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentListener {
 
@@ -118,6 +122,20 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
     override fun hideLoading() {
         if (this.indeterminateBar.visibility == View.VISIBLE)
             this.indeterminateBar.visibility = View.GONE
+    }
+
+    override fun showErrorDialog(message : Int ) {
+        val builder: AlertDialog.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert)
+        } else {
+            AlertDialog.Builder(this)
+        }
+        builder
+            .setMessage(message)
+            .setPositiveButton(android.R.string.yes) { dialog, which ->
+                dialog.cancel()
+            }
+            .show()
     }
 
 }

@@ -12,6 +12,8 @@ interface IWeatherContract {
 
         fun replaceFragment()
 
+        fun showErrorDialog( message : Int )
+
     }
 
     interface Presenter {

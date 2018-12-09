@@ -3,6 +3,7 @@ package com.olkunmustafa.sampleweatherapp.weathermain
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.data.apiclient.ApiClient
 import com.olkunmustafa.sampleweatherapp.data.services.IGetCurrentWeatherMap
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
@@ -10,6 +11,7 @@ import com.olkunmustafa.sampleweatherapp.data.weatherlist.IWeatherUtil
 import com.olkunmustafa.sampleweatherapp.permissions.location.AccessLocation
 import com.olkunmustafa.sampleweatherapp.permissions.location.IAccessLocationUtil
 import com.olkunmustafa.sampleweatherapp.util.location.KLocationSettingsHelper
+import com.olkunmustafa.sampleweatherapp.weathermain.error.LocationNotFoundException
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -80,6 +82,10 @@ class WeatherPresenter @Inject constructor() : IWeatherContract.Presenter {
                     },
                     { err ->
                         err.printStackTrace()
+
+                        if(err is LocationNotFoundException){
+                            view.showErrorDialog(R.string.no_location_error_message)
+                        }
                     },
                     {
                         view.hideLoading()

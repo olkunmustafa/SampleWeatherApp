@@ -8,6 +8,7 @@
         android:focusable="true"
         android:id="@+id/main_card_wrapper"
         app:cardUseCompatPadding="true"
+        android:foreground="?android:attr/selectableItemBackground"
 >
 
     <LinearLayout

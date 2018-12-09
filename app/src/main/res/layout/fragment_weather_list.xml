@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/standart_space_for_app"
+        android:paddingStart="@dimen/standart_space_for_app"
+        android:paddingRight="@dimen/standart_space_for_app"
+        android:paddingEnd="@dimen/standart_space_for_app"
+        android:background="@color/gallery"
+>
+
+    <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/no_empty_view_text"
+            android:text="@string/no_data_text"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/no_data_ts"
+            android:visibility="gone"
+    />
+
+    <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/weather_request_list"
+            android:visibility="gone"
+            android:layoutAnimation="@anim/layout_animation_fall_down"
+    />
+
+</FrameLayout>

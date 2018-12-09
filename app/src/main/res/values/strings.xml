@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">SampleWeatherApp</string>
+
+    <string name="request_time">Request Time</string>
+    <string name="temperature">Temperature</string>
+    <string name="location">Location</string>
+    <string name="no_data_text">Any record could not find in local database. To get new data from remote server please
+        touch the recort button.
+    </string>
+
+    <string name="wind_speed">Wind Speed</string>
+    <string name="wind_degree">Wind Degree</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="humidity">Humidity</string>
+    <string name="visibility">Visibility</string>
+
+    <string name="no_location_error_message">Last location can not found on device. Please be sure location is open and try again.</string>
+
 </resources>

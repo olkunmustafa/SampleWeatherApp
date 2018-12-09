@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@color/gallery"
+        android:paddingLeft="@dimen/standart_space_for_app"
+        android:paddingStart="@dimen/standart_space_for_app"
+        android:paddingRight="@dimen/standart_space_for_app"
+        android:paddingEnd="@dimen/standart_space_for_app"
+>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/cardview_list_item_plr"
+            android:paddingStart="@dimen/cardview_list_item_plr"
+            android:paddingRight="@dimen/cardview_list_item_plr"
+            android:paddingEnd="@dimen/cardview_list_item_plr"
+            android:paddingTop="@dimen/cardview_list_item_ptb"
+            android:paddingBottom="@dimen/cardview_list_item_ptb"
+    >
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/main_detail_wrapper"
+                android:alpha="0"
+        >
+
+            <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="@dimen/icon_detail_wh"
+                    android:layout_height="@dimen/icon_detail_wh"
+                    android:id="@+id/temperature_icon"
+                    android:layout_gravity="center_horizontal"
+            />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+            >
+
+                <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/current_temperature"
+                        android:textSize="42sp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginEnd="7dp"
+                        android:textColor="@color/wonderful_day"
+                />
+
+                <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/current_min_max"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="5dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/wonderful_day"
+                />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/location"
+                    android:textSize="22sp"
+                    android:textColor="@color/sharpie"
+            />
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/request_time"
+                    android:textColor="@color/gravel"
+            />
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/description"
+                    android:textColor="@color/sharpie"
+            />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/detail_wrapper_block_1"
+                android:alpha="0">
+
+            <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                    android:id="@+id/wind_speed"
+                    app:detail_title="@string/wind_speed"
+                    style="@style/DetailItemViewStyle"
+            />
+            <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                    android:id="@+id/wind_degree"
+                    app:detail_title="@string/wind_degree"
+                    style="@style/DetailItemViewStyle"
+            />
+            <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                    android:id="@+id/humidity"
+                    app:detail_title="@string/humidity"
+                    style="@style/DetailItemViewStyle"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/detail_wrapper_block_2"
+                android:alpha="0">
+
+            <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                    android:id="@+id/sunrise"
+                    app:detail_title="@string/sunrise"
+                    style="@style/DetailItemViewStyle"
+            />
+            <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                    android:id="@+id/sunset"
+                    app:detail_title="@string/sunset"
+                    style="@style/DetailItemViewStyle"
+            />
+            <com.olkunmustafa.sampleweatherapp.weatherdetail.view.DetailItemView
+                    android:id="@+id/visibility"
+                    app:detail_title="@string/visibility"
+                    style="@style/DetailItemViewStyle"
+            />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

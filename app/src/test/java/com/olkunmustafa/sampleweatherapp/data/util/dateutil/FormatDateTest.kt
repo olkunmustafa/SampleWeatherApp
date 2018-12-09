@@ -20,11 +20,28 @@ class FormatDateTest {
 
         // Given
         val givenTimeStamp = 1543768462000L
-        val expected = "02-12-2018"
+        val expected = "02 December 2018"
         val fakeDate = Date(givenTimeStamp)
 
         // When
         val actual = this.iDateUtil.formatDate(fakeDate)
+
+        // Then
+        Assertions
+            .assertThat( actual )
+            .isEqualTo(expected)
+
+    }
+
+    @Test
+    fun formatTimeFromSecond_ShouldReturnTheRequestTime() {
+
+        // Given
+        val givenTimeStamp = 1544001600L
+        val expected = "12:20"
+
+        // When
+        val actual = this.iDateUtil.formatTimeFromSecond(givenTimeStamp)
 
         // Then
         Assertions

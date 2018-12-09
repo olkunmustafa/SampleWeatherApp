@@ -1,5 +1,6 @@
 package com.olkunmustafa.sampleweatherapp.weatherlist
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.LinearLayoutManager
@@ -15,7 +16,7 @@ import com.olkunmustafa.sampleweatherapp.R
 import com.olkunmustafa.sampleweatherapp.weatherlist.adapter.WeatherListAdapter
 import javax.inject.Inject
 
-class WeatherFragment : BaseFragment(), IWeatherListContract.View {
+class WeatherListFragment : BaseFragment(), IWeatherListContract.View {
 
     @Inject
     lateinit var presenter: WeatherListPresenter
@@ -26,13 +27,14 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
     @BindView(R.id.no_empty_view_text)
     lateinit var noEmptyViewText: AppCompatTextView
 
+
     private lateinit var viewManager: RecyclerView.LayoutManager
 
     companion object {
 
-        fun newInstance(): WeatherFragment {
+        fun newInstance(): WeatherListFragment {
             val args = Bundle()
-            val fragment = WeatherFragment()
+            val fragment = WeatherListFragment()
 
             fragment.arguments = args
             return fragment
@@ -40,25 +42,40 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
         DaggerWeatherListComponent.builder()
             .appModule(AppModule(activity!!))
             .build()
             .inject(this)
 
+        presenter.attached(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
         this.presenter.setView(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView: View = inflater.inflate(R.layout.fragment_weather, container, false)
+        val rootView: View = inflater.inflate(R.layout.fragment_weather_list, container, false)
 
         ButterKnife.bind(this, rootView)
 
         this.presenter.created()
 
         return rootView
+    }
+
+    override fun onStart() {
+        super.onStart()
+        presenter.started()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.stopped()
     }
 
     override fun onDestroy() {
@@ -71,10 +88,6 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
         viewManager = LinearLayoutManager(activity)
     }
 
-    override fun showLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun showEmptyListView() {
         if (this.noEmptyViewText.visibility == View.GONE) {
             this.noEmptyViewText.visibility = View.VISIBLE
@@ -85,7 +98,7 @@ class WeatherFragment : BaseFragment(), IWeatherListContract.View {
         }
     }
 
-    override fun showAdapter() {
+    override fun showWeatherList() {
         if (this.weatherListRequestView.visibility == View.GONE) {
             this.weatherListRequestView.visibility = View.VISIBLE
         }

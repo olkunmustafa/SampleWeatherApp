@@ -1,7 +1,9 @@
 package com.olkunmustafa.sampleweatherapp.data.weatherlist
 
 import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
+import com.olkunmustafa.sampleweatherapp.model.Weather
 import io.reactivex.Observable
+import java.sql.Date
 
 /**
  * Methods that this class contains
@@ -15,7 +17,7 @@ import io.reactivex.Observable
  * @since 0.1
  * @author Mustafa Olkun
  */
-interface IWeatherListUtil {
+interface IWeatherUtil {
 
     /**
      * Responsible to get weather request list.
@@ -25,4 +27,19 @@ interface IWeatherListUtil {
      */
     fun getWeatherRequestList(): Observable<List<WeatherRequest>>
 
+    /**
+     * Calls a spesific weather
+     *
+     * @since 0.2
+     * @author Mustafa Olkun
+     */
+    fun getWeather(id: Int): Observable<WeatherRequest>
+
+    /**
+     * Saves weather request in Local database.
+     *
+     * @since 0.2
+     * @author Mustafa Olkun
+     */
+    fun saveWeatherRequest(weatherRequest: WeatherRequest) : Observable<Long>
 }

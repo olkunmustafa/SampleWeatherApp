@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/detail_wrapper_item_inner_margin"
+        android:layout_marginBottom="@dimen/detail_wrapper_item_inner_margin"
+>
+
+    <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_key"
+            android:textStyle="bold"
+            android:textSize="@dimen/detail_item_title_ts"
+            android:gravity="center_horizontal"
+    />
+
+    <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_value"
+            android:textSize="@dimen/detail_item_desc_ts"
+            android:gravity="center_horizontal"
+    />
+
+</LinearLayout>

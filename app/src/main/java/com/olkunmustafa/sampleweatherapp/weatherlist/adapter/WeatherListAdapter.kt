@@ -3,6 +3,7 @@ package com.olkunmustafa.sampleweatherapp.weatherlist.adapter
 import android.content.Context
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,19 +15,26 @@ import com.olkunmustafa.sampleweatherapp.data.storage.WeatherRequest
 import com.olkunmustafa.sampleweatherapp.data.util.createmodel.ICreateWeatherModel
 import com.olkunmustafa.sampleweatherapp.data.util.dateutil.IDateUtil
 import com.olkunmustafa.sampleweatherapp.data.util.iconutil.IIconUtil
+import com.olkunmustafa.sampleweatherapp.data.util.temperatureutil.ITemperatureUtil
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
+import android.view.animation.AnimationUtils
 
 open class WeatherListAdapter(
     private val context: Context,
     private val icreateWeatherModel: ICreateWeatherModel,
     private val iDateUtil: IDateUtil,
-    private val iIconUtil: IIconUtil
+    private val iIconUtil: IIconUtil,
+    private val iTemperatureUtil: ITemperatureUtil
 ) : RecyclerView.Adapter<WeatherListAdapter.CardViewHolder>() {
 
-    lateinit var weatherRequestList: List<WeatherRequest>
+    val weatherRequestList: ArrayList<WeatherRequest> = ArrayList()
+    val clickSubject = PublishSubject.create<Int>()!!
+    var isAddedNewItem = false
+
     private var convertWeatherModelDis: Disposable? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
@@ -46,15 +54,25 @@ open class WeatherListAdapter(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { weather ->
-                holder.requestTime.text = iDateUtil.formatDate(weatherRequest.requestTime!!)
-                holder.temperature.text = weather.main.temp.toString()
+                holder.requestTime.text = iDateUtil.formatDate(weatherRequest.requestTime)
+                holder.currentTemperature.text = iTemperatureUtil.getStyledTemperature( weather.main.temp )
+                holder.currentMinMax.text = iTemperatureUtil.getStyledMinMaxTemperature( weather.main.tempMin, weather.main.tempMax )
                 holder.location.text = weather.name
+                holder.description.text = weather.weather[0].description
 
                 weather.weather?.get(0)?.icon?.let {
                     Picasso
                         .with(this.context)
                         .load(iIconUtil.getIconFullUrl(it))
                         .into(holder.temperatureIcon)
+                }
+
+                holder.mainCardWrapper.setOnClickListener {
+                    clickSubject.onNext(weatherRequest.uid)
+                }
+
+                if( this.isAddedNewItem ){
+                    setAnimation( holder.itemView, indis )
                 }
             }
 
@@ -70,11 +88,17 @@ open class WeatherListAdapter(
 
     class CardViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 
+        @BindView(R.id.main_card_wrapper)
+        lateinit var mainCardWrapper : CardView
+
+        @BindView(R.id.current_temperature)
+        lateinit var currentTemperature : AppCompatTextView
+
+        @BindView(R.id.current_min_max)
+        lateinit var currentMinMax : AppCompatTextView
+
         @BindView(R.id.request_time)
         lateinit var requestTime: AppCompatTextView
-
-        @BindView(R.id.temperature)
-        lateinit var temperature: AppCompatTextView
 
         @BindView(R.id.location)
         lateinit var location: AppCompatTextView
@@ -82,9 +106,21 @@ open class WeatherListAdapter(
         @BindView(R.id.temperature_icon)
         lateinit var temperatureIcon: AppCompatImageView
 
+        @BindView(R.id.description)
+        lateinit var description : AppCompatTextView
+
         init {
             ButterKnife.bind(this, view)
         }
 
+    }
+
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position == 0) {
+            val animation = AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down)
+            viewToAnimate.startAnimation(animation)
+            isAddedNewItem = false
+        }
     }
 }

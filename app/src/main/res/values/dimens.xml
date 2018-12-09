@@ -12,6 +12,10 @@
     <dimen name="detail_wrapper_mt">20dp</dimen>
     <dimen name="detail_wrapper_item_ptb">15dp</dimen>
     <dimen name="detail_wrapper_item_mrl">5dp</dimen>
+    <dimen name="detail_wrapper_item_inner_margin">20dp</dimen>
+    <dimen name="detail_item_title_ts">16sp</dimen>
+    <dimen name="detail_item_desc_ts">14sp</dimen>
+
     <dimen name="icon_wh">70dp</dimen>
     <dimen name="icon_detail_wh">80dp</dimen>
 </resources>

@@ -6,7 +6,9 @@
         android:layout_marginLeft="@dimen/standart_space_for_app"
         android:layout_marginStart="@dimen/standart_space_for_app"
         android:layout_marginRight="@dimen/standart_space_for_app"
-        android:layout_marginEnd="@dimen/standart_space_for_app">
+        android:layout_marginEnd="@dimen/standart_space_for_app"
+        android:background="@color/gallery"
+>
 
     <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"

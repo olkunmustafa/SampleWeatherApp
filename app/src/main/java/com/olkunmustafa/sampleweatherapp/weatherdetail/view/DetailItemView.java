@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import butterknife.BindView;
@@ -12,7 +13,7 @@ import com.olkunmustafa.sampleweatherapp.R;
 
 import javax.annotation.Nullable;
 
-public class DetailItemView extends LinearLayout {
+public class DetailItemView extends CardView {
 
     private Context mContext;
     private AttributeSet mAttributeSet;
@@ -57,10 +58,10 @@ public class DetailItemView extends LinearLayout {
 
         int wrapperPaddingTB = mContext.getResources().getDimensionPixelOffset(R.dimen.detail_wrapper_item_ptb);
         this.setPadding(0, wrapperPaddingTB, 0, wrapperPaddingTB);
-        this.setOrientation(LinearLayout.VERTICAL);
-        this.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.sandy_sand));
+        this.setBackgroundColor(ContextCompat.getColor(this.mContext, R.color.white));
 
         ButterKnife.bind(this);
+
         this.setDetailKey(this.mDetailTitle);
     }
 

@@ -6,7 +6,12 @@
         android:orientation="vertical"
         android:clickable="true"
         android:focusable="true"
-        android:background="@color/gallery">
+        android:background="@color/gallery"
+        android:paddingLeft="@dimen/standart_space_for_app"
+        android:paddingStart="@dimen/standart_space_for_app"
+        android:paddingRight="@dimen/standart_space_for_app"
+        android:paddingEnd="@dimen/standart_space_for_app"
+>
 
     <LinearLayout
             android:layout_width="match_parent"

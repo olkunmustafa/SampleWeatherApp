@@ -3,10 +3,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/standart_space_for_app"
-        android:layout_marginStart="@dimen/standart_space_for_app"
-        android:layout_marginRight="@dimen/standart_space_for_app"
-        android:layout_marginEnd="@dimen/standart_space_for_app"
+        android:paddingLeft="@dimen/standart_space_for_app"
+        android:paddingStart="@dimen/standart_space_for_app"
+        android:paddingRight="@dimen/standart_space_for_app"
+        android:paddingEnd="@dimen/standart_space_for_app"
         android:background="@color/gallery"
 >
 

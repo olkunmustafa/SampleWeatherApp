@@ -34,15 +34,17 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        DaggerWeatherComponent.builder()
-            .appModule(AppModule(this))
-            .weatherModule(WeatherModule(this))
-            .build()
-            .inject(this)
+        if( savedInstanceState == null || !savedInstanceState.getBoolean( "test" ) ){
+            DaggerWeatherComponent.builder()
+                .appModule(AppModule(this))
+                .weatherModule(WeatherModule(this))
+                .build()
+                .inject(this)
 
-        ButterKnife.bind(this)
-        this.presenter.setView(this)
-        this.presenter.created()
+            ButterKnife.bind(this)
+            this.presenter.setView(this)
+            this.presenter.created()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -68,6 +70,12 @@ class WeatherActivity : AppCompatActivity(), IWeatherContract.View, IFragmentLis
                 .addToBackStack(null)
                 .commit()
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+
+        outState?.putBoolean( "test", true )
     }
 
     override fun openDetailFragment(dataID: Int) {

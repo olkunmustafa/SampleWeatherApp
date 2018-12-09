@@ -15,7 +15,8 @@
             android:supportsRtl="true"
             android:name=".BaseApplication"
             android:theme="@style/AppTheme">
-        <activity android:name=".weathermain.WeatherActivity">
+        <activity android:name=".weathermain.WeatherActivity"
+                  android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
